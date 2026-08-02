@@ -49,7 +49,7 @@ if menu == "Analise Preditiva":
     
     with col_q:
         if os.path.exists("Quartzo.jpg"):
-            st.image("Quartzo.jpg", use_column_width=False)
+            st.image("Quartzo.jpg", width=120)
         else:
             st.caption("*(Imagem Quartzo.jpg pendente)*")
         st.markdown("##### Quartzo")
@@ -57,7 +57,7 @@ if menu == "Analise Preditiva":
         
     with col_ag:
         if os.path.exists("Agata.jpg"):
-            st.image("Agata.jpg", use_column_width=True)
+            st.image("Agata.jpg", width=120)
         else:
             st.caption("*(Imagem Agata.jpg pendente)*")
         st.markdown("##### Ágata")
@@ -65,7 +65,7 @@ if menu == "Analise Preditiva":
         
     with col_am:
         if os.path.exists("Ametista.jpg"):
-            st.image("Ametista.jpg", use_column_width=True)
+            st.image("Ametista.jpg", width=120)
         else:
             st.caption("*(Imagem Ametista.jpg pendente)*")
         st.markdown("##### Ametista")
@@ -73,7 +73,7 @@ if menu == "Analise Preditiva":
         
     with col_t:
         if os.path.exists("Topazio.jpg"):
-            st.image("Topazio.jpg", use_column_width=True)
+            st.image("Topazio.jpg", width=120)
         else:
             st.caption("*(Imagem Topazio.jpg pendente)*")
         st.markdown("##### Topázio")
