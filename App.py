@@ -49,7 +49,7 @@ if menu == "Analise Preditiva":
     
     with col_q:
         if os.path.exists("Quartzo.jpg"):
-            st.image("Quartzo.jpg", use_column_width=True)
+            st.image("Quartzo.jpg", use_column_width=False)
         else:
             st.caption("*(Imagem Quartzo.jpg pendente)*")
         st.markdown("##### Quartzo")
