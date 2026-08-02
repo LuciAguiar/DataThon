@@ -108,7 +108,7 @@ elif menu == "Histórico":
     
     # Lista com o nome dos arquivos das imagens que você quer exibir
     # Substitua pelos nomes exatos dos seus arquivos .jpg ou .png
-    imagens = ["ingressantes_idade.jpg", "ingressantes_genero.jpg", "analise_por_pedra.png"]
+    imagens = ["ingressantes_idade.png", "ingressantes_genero.png", "analise_por_pedra.png"]
     
     for img in imagens:
         if os.path.exists(img):
