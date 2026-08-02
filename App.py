@@ -42,34 +42,34 @@ if menu == "Aplicativo Predição":
     col_q, col_ag, col_am, col_t = st.columns(4)
     
     with col_q:
-        if os.path.exists("quartzo.jpg"):
-            st.image("quartzo.jpg", use_column_width=True)
+        if os.path.exists("Quartzo.jpg"):
+            st.image("Quartzo.jpg", use_column_width=True)
         else:
-            st.caption("*(Imagem quartzo.jpg pendente)*")
+            st.caption("*(Imagem Quartzo.jpg pendente)*")
         st.markdown("##### Quartzo")
         st.caption("INDE: 2,405 a 5,506")
         
     with col_ag:
-        if os.path.exists("agata.jpg"):
-            st.image("agata.jpg", use_column_width=True)
+        if os.path.exists("Agata.jpg"):
+            st.image("Agata.jpg", use_column_width=True)
         else:
-            st.caption("*(Imagem agata.jpg pendente)*")
+            st.caption("*(Imagem Agata.jpg pendente)*")
         st.markdown("##### Ágata")
         st.caption("INDE: 5,506 a 6,868")
         
     with col_am:
-        if os.path.exists("ametista.jpg"):
-            st.image("ametista.jpg", use_column_width=True)
+        if os.path.exists("Ametista.jpg"):
+            st.image("Ametista.jpg", use_column_width=True)
         else:
-            st.caption("*(Imagem ametista.jpg pendente)*")
+            st.caption("*(Imagem Ametista.jpg pendente)*")
         st.markdown("##### Ametista")
         st.caption("INDE: 6,868 a 8,230")
         
     with col_t:
-        if os.path.exists("topazio.jpg"):
-            st.image("topazio.jpg", use_column_width=True)
+        if os.path.exists("Topazio.jpg"):
+            st.image("Topazio.jpg", use_column_width=True)
         else:
-            st.caption("*(Imagem topazio.jpg pendente)*")
+            st.caption("*(Imagem Topazio.jpg pendente)*")
         st.markdown("##### Topázio")
         st.caption("INDE: 8,230 a 9,294")
 
@@ -98,7 +98,7 @@ if menu == "Aplicativo Predição":
 
     with col2:
         st.subheader("Indicadores Psicossociais e de Base")
-        ipp = st.slider("IPP - Ponto de Partida", 0.0, 10.0, 5.0, 0.1)
+        ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
         ipv = st.slider("IPV - Ponto de Virada", 0.0, 10.0, 5.0, 0.1)
         ips = st.slider("IPS - Indicador Psicossocial", 0.0, 10.0, 5.0, 0.1)
         iaa = st.slider("IAA - Autoavaliação", 0.0, 10.0, 5.0, 0.1)
@@ -155,14 +155,14 @@ elif menu == "Documentação":
     st.title("Documentação Oficial 📄")
     st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
     
-    caminho_pdf = "Documentacao.pdf"
+    caminho_pdf = "Documentação.pdf"
     
     if os.path.exists(caminho_pdf):
         with open(caminho_pdf, "rb") as pdf_file:
             st.download_button(
                 label="⬇️ Baixar Documentação em PDF",
                 data=pdf_file,
-                file_name="Documentacao.pdf",
+                file_name="Documentação.pdf",
                 mime="application/pdf"
             )
         
@@ -173,4 +173,4 @@ elif menu == "Documentação":
         pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
         st.markdown(pdf_display, unsafe_allow_html=True)
     else:
-        st.error("O arquivo 'Documentacao.pdf' não foi encontrado no repositório. Por favor, verifique o nome exato e faça o upload no GitHub.")
+        st.error("O arquivo 'Documentação.pdf' não foi encontrado no repositório. Por favor, verifique o nome exato e faça o upload no GitHub.")
