@@ -5,12 +5,12 @@ import base64
 import os
 
 # Configuração da página
-st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="Passos-magicos.png", layout="wide")
+st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
 
-# Carregar o modelo em cache para otimizar a performance
+# Carregar o NOVO modelo em cache
 @st.cache_resource
 def load_model():
-    return joblib.load('modelo_passos_magicos.pkl')
+    return joblib.load('modelo_passos_magicos_2023.pkl')
 
 modelo = load_model()
 
@@ -36,42 +36,38 @@ if menu == "Aplicativo Predição":
     na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise What-If**.
     """)
     
-    # ---------------------------------------------------------
-    # NOVA TABELA DE REFERÊNCIA VISUAL (COM IMAGENS JPG)
-    # ---------------------------------------------------------
+    # Tabela de Referência Visual (Com Imagens JPG)
     st.markdown("### 📊 Tabela de Referência (INDE)")
     
-    # Criamos 4 colunas proporcionais na tela para exibir as pedras lado a lado
     col_q, col_ag, col_am, col_t = st.columns(4)
     
     with col_q:
-        # Verifica se a imagem existe antes de tentar exibi-la para evitar erros na tela
-        if os.path.exists("Quartzo.jpg"):
-            st.image("Quartzo.jpg", use_column_width=True)
+        if os.path.exists("quartzo.jpg"):
+            st.image("quartzo.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem quartzo.jpg pendente)*")
         st.markdown("##### Quartzo")
         st.caption("INDE: 2,405 a 5,506")
         
     with col_ag:
-        if os.path.exists("Agata.jpg"):
-            st.image("Agata.jpg", use_column_width=True)
+        if os.path.exists("agata.jpg"):
+            st.image("agata.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem agata.jpg pendente)*")
         st.markdown("##### Ágata")
         st.caption("INDE: 5,506 a 6,868")
         
     with col_am:
-        if os.path.exists("Ametista.jpg"):
-            st.image("Ametista.jpg", use_column_width=True)
+        if os.path.exists("ametista.jpg"):
+            st.image("ametista.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem ametista.jpg pendente)*")
         st.markdown("##### Ametista")
         st.caption("INDE: 6,868 a 8,230")
         
     with col_t:
-        if os.path.exists("Topazio.jpg"):
-            st.image("Topazio.jpg", use_column_width=True)
+        if os.path.exists("topazio.jpg"):
+            st.image("topazio.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem topazio.jpg pendente)*")
         st.markdown("##### Topázio")
@@ -80,7 +76,7 @@ if menu == "Aplicativo Predição":
     st.divider()
 
     # ---------------------------------------------------------
-    # ENTRADA DE DADOS (SLIDERS)
+    # ENTRADA DE DADOS (SLIDERS COM IPP)
     # ---------------------------------------------------------
     col1, col2 = st.columns(2)
 
@@ -101,24 +97,27 @@ if menu == "Aplicativo Predição":
         ian = st.slider("IAN - Adequação de Nível", 0.0, 10.0, 5.0, 0.1)
 
     with col2:
-        st.subheader("Indicadores Psicossociais")
+        st.subheader("Indicadores Psicossociais e de Base")
+        ipp = st.slider("IPP - Ponto de Partida", 0.0, 10.0, 5.0, 0.1)
         ipv = st.slider("IPV - Ponto de Virada", 0.0, 10.0, 5.0, 0.1)
         ips = st.slider("IPS - Indicador Psicossocial", 0.0, 10.0, 5.0, 0.1)
         iaa = st.slider("IAA - Autoavaliação", 0.0, 10.0, 5.0, 0.1)
 
     st.divider()
 
-    # Cálculo automático do INDE Recalculado
-    pesos = {'IAN': 0.1111, 'IDA': 0.2222, 'IEG': 0.2222, 'IAA': 0.1111, 'IPS': 0.1111, 'IPV': 0.2222}
+    # Cálculo automático do INDE Oficial (com IPP)
+    pesos = {'IAN': 0.1, 'IDA': 0.2, 'IEG': 0.2, 'IAA': 0.1, 'IPS': 0.1, 'IPV': 0.2, 'IPP': 0.1}
     inde_simulado = (ian*pesos['IAN'] + ida*pesos['IDA'] + ieg*pesos['IEG'] + 
-                     iaa*pesos['IAA'] + ips*pesos['IPS'] + ipv*pesos['IPV'])
+                     iaa*pesos['IAA'] + ips*pesos['IPS'] + ipv*pesos['IPV'] + ipp*pesos['IPP'])
 
     st.write(f"**INDE Atual Simulado:** {inde_simulado:.2f}")
 
     # Botão de Predição
     if st.button("Simular Classificação (Pedra) no Próximo Ano", type="primary"):
-        features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'INDE_RECALCULADO']
-        entrada = pd.DataFrame([[ian, ida, ieg, iaa, ips, ipv, inde_simulado]], columns=features)
+        # A ordem deve ser estritamente igual a do treinamento:
+        # ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
+        features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
+        entrada = pd.DataFrame([[ian, ida, ieg, iaa, ips, ipv, ipp, inde_simulado]], columns=features)
         
         predicao = modelo.predict(entrada)[0]
         
@@ -139,8 +138,8 @@ elif menu == "Histórico":
     st.title("Histórico de Análises 📈")
     st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
     
-    # Lista com o nome dos arquivos das imagens
-    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo.png"]
+    # Atualize os nomes das imagens geradas na nova versão
+    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo_atualizado.png"]
     
     for img in imagens:
         if os.path.exists(img):
