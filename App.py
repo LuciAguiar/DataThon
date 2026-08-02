@@ -36,19 +36,52 @@ if menu == "Aplicativo Predição":
     na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise What-If**.
     """)
     
-    # Nova Tabela de Referência do INDE
+    # ---------------------------------------------------------
+    # NOVA TABELA DE REFERÊNCIA VISUAL (COM IMAGENS JPG)
+    # ---------------------------------------------------------
     st.markdown("### 📊 Tabela de Referência (INDE)")
-    dados_referencia = {
-        "Pedra": ["Quartzo", "Ágata", "Ametista", "Topázio"],
-        "Faixa de Classificação (INDE)": ["2,405 a 5,506", "5,506 a 6,868", "6,868 a 8,230", "8,230 a 9,294"]
-    }
-    df_ref = pd.DataFrame(dados_referencia)
-    # Esconde o índice do DataFrame para deixar a visualização mais limpa
-    st.dataframe(df_ref, hide_index=True, use_container_width=True)
+    
+    # Criamos 4 colunas proporcionais na tela para exibir as pedras lado a lado
+    col_q, col_ag, col_am, col_t = st.columns(4)
+    
+    with col_q:
+        # Verifica se a imagem existe antes de tentar exibi-la para evitar erros na tela
+        if os.path.exists("quartzo.jpg"):
+            st.image("quartzo.jpg", use_column_width=True)
+        else:
+            st.caption("*(Imagem quartzo.jpg pendente)*")
+        st.markdown("##### Quartzo")
+        st.caption("INDE: 2,405 a 5,506")
+        
+    with col_ag:
+        if os.path.exists("agata.jpg"):
+            st.image("agata.jpg", use_column_width=True)
+        else:
+            st.caption("*(Imagem agata.jpg pendente)*")
+        st.markdown("##### Ágata")
+        st.caption("INDE: 5,506 a 6,868")
+        
+    with col_am:
+        if os.path.exists("ametista.jpg"):
+            st.image("ametista.jpg", use_column_width=True)
+        else:
+            st.caption("*(Imagem ametista.jpg pendente)*")
+        st.markdown("##### Ametista")
+        st.caption("INDE: 6,868 a 8,230")
+        
+    with col_t:
+        if os.path.exists("topazio.jpg"):
+            st.image("topazio.jpg", use_column_width=True)
+        else:
+            st.caption("*(Imagem topazio.jpg pendente)*")
+        st.markdown("##### Topázio")
+        st.caption("INDE: 8,230 a 9,294")
 
     st.divider()
 
-    # Layout em colunas para os sliders
+    # ---------------------------------------------------------
+    # ENTRADA DE DADOS (SLIDERS)
+    # ---------------------------------------------------------
     col1, col2 = st.columns(2)
 
     with col1:
@@ -106,9 +139,8 @@ elif menu == "Histórico":
     st.title("Histórico de Análises 📈")
     st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
     
-    # Lista com o nome dos arquivos das imagens que você quer exibir
-    # Substitua pelos nomes exatos dos seus arquivos .jpg ou .png
-    imagens = ["ingressantes_idade.png", "ingressantes_genero.png", "analise_por_pedra.png"]
+    # Lista com o nome dos arquivos das imagens
+    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo.png"]
     
     for img in imagens:
         if os.path.exists(img):
@@ -124,10 +156,9 @@ elif menu == "Documentação":
     st.title("Documentação Oficial 📄")
     st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
     
-    caminho_pdf = "Documentação.pdf"
+    caminho_pdf = "Documentacao.pdf"
     
     if os.path.exists(caminho_pdf):
-        # Gerar botão de download direto
         with open(caminho_pdf, "rb") as pdf_file:
             st.download_button(
                 label="⬇️ Baixar Documentação em PDF",
@@ -137,7 +168,6 @@ elif menu == "Documentação":
             )
         
         st.markdown("### Visualização do Documento")
-        # Rotina para renderizar o PDF diretamente na tela usando Iframe e Base64
         with open(caminho_pdf, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
         
