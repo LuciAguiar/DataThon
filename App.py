@@ -123,9 +123,6 @@ if menu == "Aplicativo Predição":
         st.divider()
         st.subheader("Resultado da Predição:")
         
-        # Caixa de Aviso (WARNING) sobre as limitações do modelo
-        st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
-        
         # ---------------------------------------------------------
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
         # ---------------------------------------------------------
@@ -182,22 +179,12 @@ if menu == "Aplicativo Predição":
             Este aluno já compreendeu o propósito da Associação e está voando.
             **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
             """)
-# ==========================================
-# PÁGINA 2: HISTÓRICO (IMAGENS)
-# ==========================================
-elif menu == "Histórico":
-    st.title("Histórico de Análises 📈")
-    st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
-    
-    # Atualize os nomes das imagens geradas na nova versão
-    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo_atualizado.png"]
-    
-    for img in imagens:
-        if os.path.exists(img):
-            st.image(img, use_column_width=True)
-            st.divider()
-        else:
-            st.warning(f"A imagem '{img}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
+        
+        # ---------------------------------------------------------
+        # CAIXA DE AVISO (POSICIONADA AO FINAL DO DIAGNÓSTICO)
+        # ---------------------------------------------------------
+        st.markdown("<br>", unsafe_allow_html=True) # Adiciona um pequeno espaçamento visual
+        st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
 
 # ==========================================
 # PÁGINA 3: DOCUMENTAÇÃO (PDF)
