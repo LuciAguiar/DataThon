@@ -46,32 +46,32 @@ if menu == "Aplicativo Predição":
     
     with col_q:
         # Verifica se a imagem existe antes de tentar exibi-la para evitar erros na tela
-        if os.path.exists("quartzo.jpg"):
-            st.image("quartzo.jpg", use_column_width=True)
+        if os.path.exists("Quartzo.jpg"):
+            st.image("Quartzo.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem quartzo.jpg pendente)*")
         st.markdown("##### Quartzo")
         st.caption("INDE: 2,405 a 5,506")
         
     with col_ag:
-        if os.path.exists("agata.jpg"):
-            st.image("agata.jpg", use_column_width=True)
+        if os.path.exists("Agata.jpg"):
+            st.image("Agata.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem agata.jpg pendente)*")
         st.markdown("##### Ágata")
         st.caption("INDE: 5,506 a 6,868")
         
     with col_am:
-        if os.path.exists("ametista.jpg"):
-            st.image("ametista.jpg", use_column_width=True)
+        if os.path.exists("Ametista.jpg"):
+            st.image("Ametista.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem ametista.jpg pendente)*")
         st.markdown("##### Ametista")
         st.caption("INDE: 6,868 a 8,230")
         
     with col_t:
-        if os.path.exists("topazio.jpg"):
-            st.image("topazio.jpg", use_column_width=True)
+        if os.path.exists("Topazio.jpg"):
+            st.image("Topazio.jpg", use_column_width=True)
         else:
             st.caption("*(Imagem topazio.jpg pendente)*")
         st.markdown("##### Topázio")
