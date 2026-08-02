@@ -45,41 +45,44 @@ if menu == "Analise Preditiva":
     # Tabela de Referência Visual (Com Imagens JPG)
     st.markdown("### 📊 Tabela de Referência (INDE)")
     
-    col_q, col_ag, col_am, col_t = st.columns(4)
+    # TRUQUE DE LAYOUT: [1, 1, 1, 1, 4] 
+    # As 4 primeiras colunas têm peso "1" (ficam estreitas e juntas).
+    # A última coluna tem peso "4" (serve como um espaçador vazio enorme à direita).
+    col_q, col_ag, col_am, col_t, espacador = st.columns([1, 1, 1, 1, 4])
     
     with col_q:
         if os.path.exists("Quartzo.jpg"):
-            st.image("Quartzo.jpg", width=120)
+            st.image("Quartzo.jpg", width=120) 
         else:
-            st.caption("*(Imagem Quartzo.jpg pendente)*")
+            st.caption("*(Imagem pendente)*")
         st.markdown("##### Quartzo")
-        st.caption("INDE: 2,405 a 5,506")
+        st.caption("2,405 a 5,506")
         
     with col_ag:
         if os.path.exists("Agata.jpg"):
             st.image("Agata.jpg", width=120)
         else:
-            st.caption("*(Imagem Agata.jpg pendente)*")
+            st.caption("*(Imagem pendente)*")
         st.markdown("##### Ágata")
-        st.caption("INDE: 5,506 a 6,868")
+        st.caption("5,506 a 6,868")
         
     with col_am:
         if os.path.exists("Ametista.jpg"):
             st.image("Ametista.jpg", width=120)
         else:
-            st.caption("*(Imagem Ametista.jpg pendente)*")
+            st.caption("*(Imagem pendente)*")
         st.markdown("##### Ametista")
-        st.caption("INDE: 6,868 a 8,230")
+        st.caption("6,868 a 8,230")
         
     with col_t:
         if os.path.exists("Topazio.jpg"):
             st.image("Topazio.jpg", width=120)
         else:
-            st.caption("*(Imagem Topazio.jpg pendente)*")
+            st.caption("*(Imagem pendente)*")
         st.markdown("##### Topázio")
-        st.caption("INDE: 8,230 a 9,294")
+        st.caption("8,230 a 9,294")
 
-    st.divider()
+    #st.divider()
 
     # ---------------------------------------------------------
     # ENTRADA DE DADOS (SLIDERS COM IPP)
