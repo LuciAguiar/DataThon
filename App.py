@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import base64
 import os
 
 # Configuração da página
@@ -16,23 +17,16 @@ modelo = load_model()
 # ==========================================
 # MENU LATERAL (SIDEBAR)
 # ==========================================
-# Inserindo a logomarca da Associação
 if os.path.exists("Passos-magicos.png"):
     st.sidebar.image("Passos-magicos.png", use_column_width=True)
 
 st.sidebar.title("Navegação")
 
-# Opções do menu apenas com as páginas internas
+# Retornamos a opção para o menu de rádio interno
 menu = st.sidebar.radio(
-    "Selecione a página interna:", 
-    ["Analise Preditiva", "Dashboards Dados 2022 - 2024"]
+    "Selecione a página:", 
+    ["Analise Preditiva", "Dashboards Dados 2022 - 2024", "Documentação Executiva"]
 )
-
-st.sidebar.divider()
-
-# Botão de Link Externo para abrir o PDF direto no navegador (GitHub)
-url_pdf = "https://github.com/LuciAguiar/DataThon/blob/main/Documentação.pdf"
-st.sidebar.page_link(url_pdf, label="Documentação Executiva", icon="📄")
 
 st.sidebar.divider()
 st.sidebar.info("Utilize este menu para navegar entre o simulador preditivo, as análises históricas e a documentação oficial.")
@@ -138,9 +132,7 @@ if menu == "Analise Preditiva":
         # ---------------------------------------------------------
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
         # ---------------------------------------------------------
-        # Calcula a média dos indicadores psicossociais e de engajamento
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
-        # Verifica se existe um "descolamento" perigoso entre notas e engajamento
         descolamento_cognitivo = ida - media_engajamento_psico
         
         if predicao == 'Quartzo':
@@ -192,7 +184,6 @@ if menu == "Analise Preditiva":
             **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
             """)
         
-        # Caixa de Aviso 
         st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
 
@@ -211,3 +202,35 @@ elif menu == "Dashboards Dados 2022 - 2024":
             st.divider()
         else:
             st.warning(f"A imagem '{img}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
+
+# ==========================================
+# PÁGINA 3: DOCUMENTAÇÃO EXECUTIVA
+# ==========================================
+elif menu == "Documentação Executiva":
+    st.title("Documentação Oficial 📄")
+    st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
+    
+    caminho_pdf = "Documentação.pdf"
+    
+    if os.path.exists(caminho_pdf):
+        # Botão para quem preferir baixar o arquivo
+        with open(caminho_pdf, "rb") as pdf_file:
+            st.download_button(
+                label="⬇️ Baixar Documentação em PDF",
+                data=pdf_file,
+                file_name="Documentação.pdf",
+                mime="application/pdf",
+                type="primary"
+            )
+        
+        st.divider()
+        st.markdown("### Visualização do Documento")
+        
+        # Renderiza o PDF para leitura na própria tela do aplicativo
+        with open(caminho_pdf, "rb") as f:
+            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+        
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
+        st.markdown(pdf_display, unsafe_allow_html=True)
+    else:
+        st.error("O arquivo 'Documentação.pdf' não foi encontrado no repositório. Por favor, verifique o nome exato e faça o upload no GitHub.")
