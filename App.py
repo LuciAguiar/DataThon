@@ -17,18 +17,25 @@ modelo = load_model()
 # ==========================================
 # MENU LATERAL (SIDEBAR)
 # ==========================================
-st.sidebar.title("Navegação 🧭")
+# Inserindo a logomarca da Associação
+if os.path.exists("Passos-magicos.png"):
+    st.sidebar.image("Passos-magicos.png", use_column_width=True)
+
+# Título do menu sem o emoji
+st.sidebar.title("Navegação")
+
+# Opções do menu renomeadas
 menu = st.sidebar.radio(
     "Selecione a página:", 
-    ["Aplicativo Predição", "Histórico", "Documentação"]
+    ["Analise Preditiva", "Dashboards Dados 2022 - 2024", "Documentação Executiva"]
 )
 st.sidebar.divider()
 st.sidebar.info("Utilize este menu para navegar entre o simulador preditivo, as análises históricas e a documentação oficial.")
 
 # ==========================================
-# PÁGINA 1: APLICATIVO PREDIÇÃO
+# PÁGINA 1: ANÁLISE PREDITIVA
 # ==========================================
-if menu == "Aplicativo Predição":
+if menu == "Analise Preditiva":
     st.title("Radar de Prevenção e Intervenção - Passos Mágicos 🔮")
     
     st.markdown("""
@@ -180,16 +187,30 @@ if menu == "Aplicativo Predição":
             **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
             """)
         
-        # ---------------------------------------------------------
-        # CAIXA DE AVISO (POSICIONADA AO FINAL DO DIAGNÓSTICO)
-        # ---------------------------------------------------------
-        st.markdown("<br>", unsafe_allow_html=True) # Adiciona um pequeno espaçamento visual
+        # Caixa de Aviso 
+        st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
 
 # ==========================================
-# PÁGINA 3: DOCUMENTAÇÃO (PDF)
+# PÁGINA 2: DASHBOARDS
 # ==========================================
-elif menu == "Documentação":
+elif menu == "Dashboards Dados 2022 - 2024":
+    st.title("Histórico de Análises 📈")
+    st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
+    
+    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo_atualizado.png"]
+    
+    for img in imagens:
+        if os.path.exists(img):
+            st.image(img, use_column_width=True)
+            st.divider()
+        else:
+            st.warning(f"A imagem '{img}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
+
+# ==========================================
+# PÁGINA 3: DOCUMENTAÇÃO
+# ==========================================
+elif menu == "Documentação Executiva":
     st.title("Documentação Oficial 📄")
     st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
     
