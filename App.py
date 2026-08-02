@@ -124,7 +124,7 @@ elif menu == "Documentação":
     st.title("Documentação Oficial 📄")
     st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
     
-    caminho_pdf = "Documentacao.pdf"
+    caminho_pdf = "Documentação.pdf"
     
     if os.path.exists(caminho_pdf):
         # Gerar botão de download direto
