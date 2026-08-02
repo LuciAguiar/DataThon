@@ -115,22 +115,73 @@ if menu == "Aplicativo Predição":
     # Botão de Predição
     if st.button("Simular Classificação (Pedra) no Próximo Ano", type="primary"):
         # A ordem deve ser estritamente igual a do treinamento:
-        # ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
         features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
         entrada = pd.DataFrame([[ian, ida, ieg, iaa, ips, ipv, ipp, inde_simulado]], columns=features)
         
         predicao = modelo.predict(entrada)[0]
         
+        st.divider()
         st.subheader("Resultado da Predição:")
+        
+        # Caixa de Aviso (WARNING) sobre as limitações do modelo
+        st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
+        
+        # ---------------------------------------------------------
+        # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
+        # ---------------------------------------------------------
+        # Calcula a média dos indicadores psicossociais e de engajamento
+        media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
+        # Verifica se existe um "descolamento" perigoso entre notas e engajamento
+        descolamento_cognitivo = ida - media_engajamento_psico
+        
         if predicao == 'Quartzo':
             st.error(f"🚨 Alerta Crítico: O aluno tem alto risco de rebaixamento para a pedra **{predicao}**.")
+            st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
+            
+            if descolamento_cognitivo >= 2.0:
+                st.write("""
+                **Sinal de Evasão/Desmotivação:** O modelo detectou um alerta grave. Embora este aluno 
+                tenha capacidade cognitiva (notas razoáveis/altas), o seu engajamento e indicadores 
+                psicossociais estão desproporcionalmente baixos. Historicamente, alunos com este perfil 
+                apresentam alto risco de abandono (evasão) ou regressão severa por falta de suporte emocional 
+                ou falta de conexão com o propósito do projeto. **Ação recomendada: Foco no acolhimento e escuta ativa.**
+                """)
+            else:
+                st.write("""
+                **Defasagem Generalizada:** O aluno apresenta indicadores baixos tanto na frente acadêmica 
+                quanto no engajamento. A inércia atual aponta para uma estagnação crítica. 
+                **Ação recomendada: Necessidade de intervenção pedagógica de base e resgate de motivação.**
+                """)
+                
         elif predicao == 'Agata':
             st.warning(f"⚠️ Atenção: O aluno está projetado para a pedra **{predicao}**.")
+            st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
+            st.write("""
+            **Perfil Mediano/Estagnado:** O modelo projeta este aluno na faixa de estabilidade inferior. 
+            Isso geralmente ocorre quando os indicadores se mantêm em uma média morna (em torno de 5 ou 6), 
+            sem picos de engajamento (IEG) ou de virada (IPV). O aluno está acompanhando, mas não está acelerando.
+            **Ação recomendada: Criar pequenos desafios extracurriculares para tentar engatilhar um 'Ponto de Virada'.**
+            """)
+            
         elif predicao == 'Ametista':
             st.info(f"✅ Bom desempenho: O aluno está projetado para a pedra **{predicao}**.")
+            st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
+            st.write("""
+            **Trilha de Desenvolvimento Saudável:** O algoritmo reconhece uma harmonia entre a absorção 
+            de conteúdo (IDA) e a participação ativa do aluno. Os indicadores apontam para um estudante 
+            engajado e com a base sólida, caminhando com segurança pelo programa.
+            **Ação recomendada: Manter o acompanhamento atual e incentivar o protagonismo em sala.**
+            """)
+            
         elif predicao == 'Topazio':
             st.success(f"🏆 Excelência: O aluno está projetado para a pedra **{predicao}**.")
-
+            st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
+            st.write("""
+            **Perfil de Alta Performance:** O modelo identificou os traços clássicos de excelência. 
+            O alto nível de engajamento aliado ao desempenho acadêmico cria uma projeção de topo. 
+            Este aluno já compreendeu o propósito da Associação e está voando.
+            **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
+            """)
 # ==========================================
 # PÁGINA 2: HISTÓRICO (IMAGENS)
 # ==========================================
