@@ -59,24 +59,24 @@ if menu == "Analise Preditiva":
         st.caption("2,405 a 5,506")
         
     with col_ag:
-        if os.path.exists("Agata.png"):
-            st.image("Agata.png", width=120)
+        if os.path.exists("Agata.jpeg"):
+            st.image("Agata.jpeg", width=120)
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ágata")
         st.caption("5,506 a 6,868")
         
     with col_am:
-        if os.path.exists("Ametista.png"):
-            st.image("Ametista.png", width=120)
+        if os.path.exists("Ametista.jpeg"):
+            st.image("Ametista.jpeg", width=120)
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ametista")
         st.caption("6,868 a 8,230")
         
     with col_t:
-        if os.path.exists("Topazio.png"):
-            st.image("Topazio.jpg", width=120)
+        if os.path.exists("Topazio.jpeg"):
+            st.image("Topazio.jpeg", width=120)
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Topázio")
