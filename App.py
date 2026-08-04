@@ -127,10 +127,18 @@ if menu == "Analise Preditiva":
         features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
         entrada = pd.DataFrame([[ian, ida, ieg, iaa, ips, ipv, ipp, inde_simulado]], columns=features)
         
-        predicao = modelo.predict(entrada)[0]
-        
         st.divider()
         st.subheader("Resultado da Predição:")
+
+        # ---------------------------------------------------------
+        # NOVA LÓGICA: EXIBIR OS DADOS ENVIADOS AO MODELO
+        # ---------------------------------------------------------
+        with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
+            st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
+            # Exibe o DataFrame formatado na tela
+            st.dataframe(entrada, use_container_width=True)
+            
+        predicao = modelo.predict(entrada)[0]
         
         # ---------------------------------------------------------
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
@@ -189,7 +197,6 @@ if menu == "Analise Preditiva":
         
         st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
-
 # ==========================================
 # PÁGINA 2: DASHBOARDS
 # ==========================================
