@@ -56,7 +56,7 @@ if menu == "Analise Preditiva":
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Quartzo")
-        st.caption("2,405 a 5,506")
+        st.caption("(2,405 a 5,506)")
         
     with col_ag:
         if os.path.exists("Agata.jpeg"):
@@ -64,7 +64,7 @@ if menu == "Analise Preditiva":
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ágata")
-        st.caption("5,506 a 6,868")
+        st.caption("(5,506 a 6,868)")
         
     with col_am:
         if os.path.exists("Ametista.jpeg"):
@@ -72,7 +72,7 @@ if menu == "Analise Preditiva":
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ametista")
-        st.caption("6,868 a 8,230")
+        st.caption("(6,868 a 8,230)")
         
     with col_t:
         if os.path.exists("Topazio.jpeg"):
@@ -80,7 +80,7 @@ if menu == "Analise Preditiva":
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Topázio")
-        st.caption("8,230 a 9,294")
+        st.caption("(8,230 a 9,294)")
 
     #st.divider()
 
