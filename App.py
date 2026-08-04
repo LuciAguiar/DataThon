@@ -60,7 +60,7 @@ if menu == "Analise Preditiva":
         
     with col_ag:
         if os.path.exists("Agata.jpg"):
-            st.image("Agata.jpg", width=120)
+            st.image("Agata.png", width=120)
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ágata")
@@ -68,14 +68,14 @@ if menu == "Analise Preditiva":
         
     with col_am:
         if os.path.exists("Ametista.jpg"):
-            st.image("Ametista.jpg", width=120)
+            st.image("Ametista.png", width=120)
         else:
             st.caption("*(Imagem pendente)*")
         st.markdown("##### Ametista")
         st.caption("6,868 a 8,230")
         
     with col_t:
-        if os.path.exists("Topazio.jpg"):
+        if os.path.exists("Topazio.jpng"):
             st.image("Topazio.jpg", width=120)
         else:
             st.caption("*(Imagem pendente)*")
