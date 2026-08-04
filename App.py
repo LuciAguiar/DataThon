@@ -4,6 +4,27 @@ import joblib
 import base64
 import os
 
+# Função para criar o farol visual dinâmico
+def exibir_farol(valor):
+    if valor <= 5.0:
+        cor = "#ff4b4b" # Vermelho
+        icone = "🔴"
+        status = "Crítico"
+    elif valor <= 8.0:
+        cor = "#faca2b" # Amarelo
+        icone = "🟡"
+        status = "Atenção"
+    else:
+        cor = "#00cc96" # Verde
+        icone = "🟢"
+        status = "Excelente"
+        
+    st.markdown(f"""
+        <div style="margin-top: -10px; margin-bottom: 15px; font-size: 14px; color: {cor}; font-weight: bold;">
+            {icone} {status}
+        </div>
+        """, unsafe_allow_html=True)
+    
 # Configuração da página
 st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
 
@@ -94,6 +115,7 @@ if menu == "Analise Preditiva":
         
         st.markdown("**Notas das Disciplinas Base (Cálculo do IDA)**")
         nota_mat = st.slider("Matemática", 0.0, 10.0, 5.0, 0.1)
+        exibir_farol(nota_mat)
         nota_por = st.slider("Português", 0.0, 10.0, 5.0, 0.1)
         nota_ing = st.slider("Inglês", 0.0, 10.0, 5.0, 0.1)
         
