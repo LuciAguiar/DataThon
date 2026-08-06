@@ -106,8 +106,22 @@ if menu == "Analise Preditiva":
         
         st.markdown("**Outros Indicadores Acadêmicos**")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
-        ian = st.slider("IAN - Adequação de Nível", 0.0, 10.0, 5.0, 0.1)
-
+        
+        # Novo IAN com Radio Button (horizontal para ficar mais elegante)
+        ian_opcao = st.radio(
+            "IAN - Adequação de Nível",
+            options=["Em Fase", "Moderada", "Severa"],
+            index=1,  # Inicia marcado no "Moderada" (equivalente ao 5.0 antigo)
+            horizontal=True
+        )
+        
+        # Lógica de tradução: converte o texto do botão no número exato para o modelo
+        if ian_opcao == "Em Fase":
+            ian = 10.0
+        elif ian_opcao == "Moderada":
+            ian = 5.0
+        elif ian_opcao == "Severa":
+            ian = 2.5
     with col2:
         st.subheader("Indicadores Psicossociais e de Base")
         ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
@@ -137,7 +151,7 @@ if menu == "Analise Preditiva":
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
         # ---------------------------------------------------------
         predicao = modelo.predict(entrada)[0]
-        
+
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
         descolamento_cognitivo = ida - media_engajamento_psico
        
