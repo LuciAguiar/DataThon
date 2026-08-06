@@ -18,12 +18,13 @@ modelo = load_model()
 # ==========================================
 # MENU LATERAL (SIDEBAR)
 # ==========================================
+# Inserindo a logomarca da Associação
 if os.path.exists("Passos-magicos.png"):
     st.sidebar.image("Passos-magicos.png", use_column_width=True)
 
 st.sidebar.title("Navegação")
 
-# Retornamos a opção para o menu de rádio interno
+# Opções do menu 
 menu = st.sidebar.radio(
     "Selecione a página:", 
     ["Analise Preditiva", "Dashboards Dados 2022 - 2024", "Documentação Executiva"]
@@ -83,7 +84,7 @@ if menu == "Analise Preditiva":
         st.markdown("##### Topázio")
         st.caption("(8,23 a 9,29)")
 
-    #st.divider()
+    st.divider()
 
     # ---------------------------------------------------------
     # ENTRADA DE DADOS (SLIDERS COM IPP)
@@ -131,16 +132,6 @@ if menu == "Analise Preditiva":
         st.divider()
         st.subheader("Resultado da Predição:")
 
-        # ---------------------------------------------------------
-        # NOVA LÓGICA: EXIBIR OS DADOS ENVIADOS AO MODELO
-        # ---------------------------------------------------------
-        with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
-            st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
-            # Exibe o DataFrame formatado na tela
-            st.dataframe(entrada, use_container_width=True)
-            
-        predicao = modelo.predict(entrada)[0]
-        
         # ---------------------------------------------------------
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
         # ---------------------------------------------------------
@@ -198,6 +189,17 @@ if menu == "Analise Preditiva":
         
         st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
+		
+		# ---------------------------------------------------------
+        # NOVA LÓGICA: EXIBIR OS DADOS ENVIADOS AO MODELO
+        # ---------------------------------------------------------
+        with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
+            st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
+            # Exibe o DataFrame formatado na tela
+            st.dataframe(entrada, use_container_width=True)
+            
+        predicao = modelo.predict(entrada)[0]
+        
 # ==========================================
 # PÁGINA 2: DASHBOARDS
 # ==========================================
