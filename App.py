@@ -225,7 +225,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
     st.title("Histórico de Análises 📈")
     st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
     
-    imagens = ["grafico1.jpg", "grafico2.jpg", "metricas_modelo_atualizado.png"]
+    imagens = ["analise_por_pedra.png", "evolucao_qtd_pedras.png", "ingressantes_idade.png"]
     
     for img in imagens:
         if os.path.exists(img):
