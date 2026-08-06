@@ -229,7 +229,8 @@ elif menu == "Dashboards Dados 2022 - 2024":
         {
  "arquivo": "analise_por_pedra.png",
             "titulo": "Análise Distribuição das Médias dos Indicadores por Classificação (Pedra)",
-            "Diagnóstico: O engajamento (IEG) funciona como o motor de arranque, mas não sustenta a alta performance sozinho. Na fase Quartzo, o IEG (5.61) é mais de 60% superior ao desempenho acadêmico (IDA: 3.46). Conforme o aluno avança, essa lacuna se fecha rapidamente, chegando a uma diferença de apenas 14% no Topázio. O insight é claro: para tirar o aluno do Quartzo, foca-se na base acadêmica; para transformar um Ametista em Topázio, o desafio é nivelar a cognição ao alto engajamento que ele já possui."        },
+            "Diagnóstico: O engajamento (IEG) funciona como o motor de arranque, mas não sustenta a alta performance sozinho. Na fase Quartzo, o IEG (5.61) é mais de 60% superior ao desempenho acadêmico (IDA: 3.46). Conforme o aluno avança, essa lacuna se fecha rapidamente, chegando a uma diferença de apenas 14% no Topázio. O insight é claro: para tirar o aluno do Quartzo, foca-se na base acadêmica; para transformar um Ametista em Topázio, o desafio é nivelar a cognição ao alto engajamento que ele já possui." ,
+        },
         {
             "arquivo": "evolucao_qtd_pedras.png",
             "titulo": "Evolução Quantidade de Alunos por Pedra",
