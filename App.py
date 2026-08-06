@@ -227,10 +227,9 @@ elif menu == "Dashboards Dados 2022 - 2024":
     # Criamos uma lista de dicionários vinculando a imagem ao seu texto explicativo
     dashboards = [
         {
-            "arquivo": "analise_por_pedra.png",
-            "titulo": "Análise por Pedra",
-            "explicacao": "Escreva aqui a explicação para o Gráfico 1. O que estes dados mostram sobre a jornada dos alunos na Associação Passos Mágicos entre 2022 e 2024?"
-        },
+ "arquivo": "analise_por_pedra.png",
+            "titulo": "Análise Distribuição das Médias dos Indicadores por Classificação (Pedra)",
+            "explicacao": "Esta análise mostra onde os educadores devem concentrar esforços. Alunos da pedra Quartzo já possuem algum engajamento (IEG: 5.61), mas sofrem com uma defasagem crítica na aprendizagem (IDA: 3.46). À medida que o aluno evolui para Ametista e Topázio, a lacuna entre o desempenho acadêmico e o engajamento diminui. O indicador psicossocial (IPS) mantém-se estável em todos os níveis, indicando que o foco de resgate para alunos em risco deve ser primariamente acadêmico."        },
         {
             "arquivo": "evolucao_qtd_pedras.png",
             "titulo": "Evolução Quantidade de Alunos por Pedra",
