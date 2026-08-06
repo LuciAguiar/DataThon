@@ -248,7 +248,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
         st.subheader(dash["titulo"])
         
         if os.path.exists(dash["arquivo"]):
-            st.image(dash["arquivo"], use_column_width=True)
+            st.image(dash["arquivo"], use_container_width=True)
             # A caixa explicativa logo abaixo da imagem
             st.info(f"**Análise dos Dados:** {dash['explicacao']}")
         else:
