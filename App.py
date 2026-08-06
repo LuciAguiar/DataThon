@@ -217,7 +217,45 @@ if menu == "Analise Preditiva":
             st.dataframe(entrada, use_container_width=True)
             
 
+ # ==========================================
+# PÁGINA 2: DASHBOARDS
+# ==========================================
+elif menu == "Dashboards Dados 2022 - 2024":
+    st.title("Histórico de Análises 📈")
+    st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
+    
+    # Criamos uma lista de dicionários vinculando a imagem ao seu texto explicativo
+    dashboards = [
+        {
+            "arquivo": "analise_por_pedra.png",
+            "titulo": "Análise por Pedra",
+            "explicacao": "Escreva aqui a explicação para o Gráfico 1. O que estes dados mostram sobre a jornada dos alunos na Associação Passos Mágicos entre 2022 e 2024?"
+        },
+        {
+            "arquivo": "evolucao_qtd_pedras.png",
+            "titulo": "Evolução Quantidade de Alunos por Pedra",
+            "explicacao": "Escreva aqui a análise do Gráfico 2. Destaque os principais padrões de engajamento ou notas que você deseja que a equipe pedagógica perceba."
+        },
+        {
+            "arquivo": "ingressantes_idade.png",
+            "titulo": "",
+            "explicacao": "Este gráfico demonstra o desempenho atual do algoritmo de Machine Learning. Destaca-se o salto no Recall (Sensibilidade) para a pedra Quartzo, atingindo 40% graças ao balanceamento (SMOTE), permitindo uma identificação precoce e mais apurada de alunos com alto risco de evasão."
+        }
+    ]
+    
+    # Laço de repetição atualizado para renderizar o título, a imagem e a caixa de texto
+    for dash in dashboards:
+        st.subheader(dash["titulo"])
         
+        if os.path.exists(dash["arquivo"]):
+            st.image(dash["arquivo"], use_column_width=True)
+            # A caixa explicativa logo abaixo da imagem
+            st.info(f"**Análise dos Dados:** {dash['explicacao']}")
+        else:
+            st.warning(f"A imagem '{dash['arquivo']}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
+            
+        st.divider() # Cria a linha separadora entre os gráficos
+               
 # ==========================================
 # PÁGINA 2: DASHBOARDS
 # ==========================================
