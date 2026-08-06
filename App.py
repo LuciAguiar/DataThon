@@ -21,7 +21,7 @@ modelo = load_model()
 # ==========================================
 # Inserindo a logomarca da Associação
 if os.path.exists("Passos-magicos.png"):
-    st.sidebar.image("Passos-magicos.png", use_column_width=True)
+    st.sidebar.image("Passos-magicos.png", use_container_width=True)
 
 st.sidebar.title("Navegação")
 
@@ -136,9 +136,12 @@ if menu == "Analise Preditiva":
         # ---------------------------------------------------------
         # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
         # ---------------------------------------------------------
+        predicao = modelo.predict(entrada)[0]
+        
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
         descolamento_cognitivo = ida - media_engajamento_psico
-        
+       
+
         if predicao == 'Quartzo':
             st.error(f"🚨 Alerta Crítico: O aluno tem alto risco de rebaixamento para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
@@ -199,7 +202,7 @@ if menu == "Analise Preditiva":
             # Exibe o DataFrame formatado na tela
             st.dataframe(entrada, use_container_width=True)
             
-        predicao = modelo.predict(entrada)[0]
+
         
 # ==========================================
 # PÁGINA 2: DASHBOARDS
@@ -212,7 +215,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
     
     for img in imagens:
         if os.path.exists(img):
-            st.image(img, use_column_width=True)
+            st.image(img, use_container_width=True)
             st.divider()
         else:
             st.warning(f"A imagem '{img}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
