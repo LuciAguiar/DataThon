@@ -336,9 +336,10 @@ elif menu == "Dashboards Dados 2022 - 2024":
             "explicacao": "O engajamento (IEG) funciona como o motor de arranque, mas não sustenta a alta performance sozinho. Na fase Quartzo, o IEG (5.61) é mais de 60% superior ao desempenho acadêmico (IDA: 3.46). Conforme o aluno avança, essa lacuna se fecha rapidamente, chegando a uma diferença de apenas 14% no Topázio. O insight é claro: para tirar o aluno do Quartzo, foca-se na base acadêmica; para transformar um Ametista em Topázio, o desafio é nivelar a cognição ao alto engajamento que ele já possui."
         },       
          {
-            "arquivo": "evolucao_qtd_pedras.png",
-            "titulo": "Evolução Quantidade de Alunos por Pedra",
-            "explicacao": "Escreva aqui a análise do Gráfico 2. Destaque os principais padrões de engajamento ou notas que você deseja que a equipe pedagógica perceba."
+            "arquivo": "ida_por_fase_ano.png",
+            "titulo": "Evolução IDA ao Longo dos Anos",
+            st.info("**Análise dos Dados:** O gráfico revela que 2023 funcionou como um ano de forte tração e pico de Desempenho Acadêmico (IDA) para a maioria das turmas. Em 2024, nota-se uma leve retração em fases iniciais e intermediárias (como 2 e 3), refletindo o choque natural com o aumento da complexidade curricular. O grande destaque positivo fica com as **Fases 5 e 6**, que mantiveram crescimento contínuo. A extrema volatilidade da **Fase 7** reforça a necessidade de analisá-la isoladamente para evitar distorções globais.")
+            #"explicacao": "O gráfico mostra que não existe um padrão de crescimento ou queda por indicador."
         },
         {
             "arquivo": "ingressantes_idade.png",
