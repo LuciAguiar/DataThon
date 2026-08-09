@@ -5,8 +5,35 @@ import base64
 import os
     
 # Configuração da página
-st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", layout="wide")
 
+# ---------------------------------------------------------
+    # CABEÇALHO INSTITUCIONAL COM IMAGEM DE FUNDO
+    # ---------------------------------------------------------
+    # Converte a imagem local em base64 para injetar no HTML/CSS
+    def get_image_base64(caminho_imagem):
+        if os.path.exists(caminho_imagem):
+            with open(caminho_imagem, "rb") as img_file:
+                return base64.b64encode(img_file.read()).decode('utf-8')
+        return ""
+
+    fundo_b64 = get_image_base64("Imagem-Fundo.png")
+    
+    # Se a imagem for encontrada, aplica no fundo, senão usa um azul escuro de segurança
+    estilo_fundo = f"background-image: url('data:image/png;base64,{fundo_b64}'); background-size: cover; background-position: center;" if fundo_b64 else "background-color: #0f172a;"
+
+    st.markdown(f"""
+    <div style="text-align: center; 
+                padding: 45px 25px; 
+                {estilo_fundo} 
+                border-radius: 10px; 
+                margin-bottom: 30px; 
+                border-bottom: 4px solid #38bdf8; 
+                box-shadow: 0px 4px 15px rgba(0,0,0,0.3);">
+        <h1 style="color: #ffffff; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); margin-bottom: 5px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Radar de Prevenção e Intervenção</h1>
+        <h4 style="color: #e2e8f0; text-shadow: 1px 1px 5px rgba(0,0,0,0.9); font-weight: 400; margin-top: 0px;">Motor de Diagnóstico Pedagógico - Associação Passos Mágicos</h4>
+    </div>
+    """, unsafe_allow_html=True)
 # ---------------------------------------------------------
 # INJEÇÃO DE CSS CUSTOMIZADO (DESIGN PROFISSIONAL)
 # ---------------------------------------------------------
