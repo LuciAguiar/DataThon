@@ -7,6 +7,35 @@ import os
 # Configuração da página
 st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
 
+# ---------------------------------------------------------
+# INJEÇÃO DE CSS CUSTOMIZADO (DESIGN PROFISSIONAL)
+# ---------------------------------------------------------
+st.markdown("""
+<style>
+    /* Estilizar o botão principal de simulação */
+    div.stButton > button:first-child {
+        background-color: #1e3a8a; /* Azul escuro corporativo */
+        color: white;
+        border-radius: 8px;
+        border: none;
+        padding: 10px 24px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    div.stButton > button:first-child:hover {
+        background-color: #3b6bce; /* Azul mais claro no hover */
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+    /* Suavizar as linhas divisórias (st.divider) */
+    hr {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+        border: 0;
+        border-top: 1px solid #e0e0e0;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Carregar o NOVO modelo em cache
 @st.cache_resource
 def load_model():
@@ -17,13 +46,11 @@ modelo = load_model()
 # ==========================================
 # MENU LATERAL (SIDEBAR)
 # ==========================================
-# Inserindo a logomarca da Associação
 if os.path.exists("Passos-magicos.png"):
     st.sidebar.image("Passos-magicos.png", use_container_width=True)
 
 st.sidebar.title("Navegação")
 
-# Opções do menu 
 menu = st.sidebar.radio(
     "Selecione a página:", 
     ["Analise Preditiva", "Dashboards Dados 2022 - 2024", "Documentação Executiva"]
@@ -36,11 +63,20 @@ st.sidebar.info("Utilize este menu para navegar entre o simulador preditivo, as 
 # PÁGINA 1: ANÁLISE PREDITIVA
 # ==========================================
 if menu == "Analise Preditiva":
-    st.title("Radar de Prevenção e Intervenção - Passos Mágicos 🔮")
+    
+    # ---------------------------------------------------------
+    # CABEÇALHO INSTITUCIONAL (HERO HEADER)
+    # ---------------------------------------------------------
+    st.markdown("""
+    <div style="text-align: center; padding: 25px; background-color: #f8f9fa; border-radius: 10px; margin-bottom: 30px; border-bottom: 4px solid #1e3a8a; box-shadow: 0px 2px 5px rgba(0,0,0,0.05);">
+        <h1 style="color: #1e3a8a; margin-bottom: 5px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Radar de Prevenção e Intervenção 🔮</h1>
+        <h4 style="color: #6c757d; font-weight: 400; margin-top: 0px;">Motor de Diagnóstico Pedagógico - Associação Passos Mágicos</h4>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("""
     Esta ferramenta permite simular o impacto dos indicadores acadêmicos e psicossociais 
-    na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise Preditiva**.
+    na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise What-If**.
     """)
     
     # Tabela de Referência Visual (Com Imagens JPG)
@@ -83,7 +119,7 @@ if menu == "Analise Preditiva":
     st.divider()
 
     # ---------------------------------------------------------
-    # ENTRADA DE DADOS (SLIDERS COM IPP)
+    # ENTRADA DE DADOS
     # ---------------------------------------------------------
     col1, col2 = st.columns(2)
 
@@ -96,7 +132,7 @@ if menu == "Analise Preditiva":
         nota_ing = st.slider("Inglês", 0.0, 10.0, 5.0, 0.1)
         
         ida = (nota_mat + nota_por + nota_ing) / 3
-        st.info(f"**IDA Calculado (Média):** {ida:.2f}")
+        st.metric(label="📊 IDA Calculado (Média das Notas)", value=f"{ida:.2f}")
         
         st.markdown("**Outros Indicadores Acadêmicos**")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
@@ -129,7 +165,12 @@ if menu == "Analise Preditiva":
     inde_simulado = (ian*pesos['IAN'] + ida*pesos['IDA'] + ieg*pesos['IEG'] + 
                      iaa*pesos['IAA'] + ips*pesos['IPS'] + ipv*pesos['IPV'] + ipp*pesos['IPP'])
 
-    st.write(f"**INDE Atual Simulado:** {inde_simulado:.2f}")
+    st.metric(
+        label="🎯 INDE Atual Simulado (Projeção Matemática)", 
+        value=f"{inde_simulado:.2f}",
+        help="Este índice é calculado dinamicamente com base nos pesos oficiais da associação."
+    )
+    st.markdown("<br>", unsafe_allow_html=True)
 
     if st.button("Simular Classificação (Pedra) no Próximo Ano", type="primary"):
         features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
@@ -139,10 +180,9 @@ if menu == "Analise Preditiva":
         st.subheader("Resultado da Predição:")
 
         # ---------------------------------------------------------
-        # PREDIÇÃO E LEITURA DO ALGORITMO
+        # PREDIÇÃO E LEITURA DO ALGORITMO (ATUALIZADA)
         # ---------------------------------------------------------
         predicao = modelo.predict(entrada)[0]
-
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
        
         if predicao == 'Quartzo':
@@ -205,7 +245,7 @@ if menu == "Analise Preditiva":
             """)
         
         # ---------------------------------------------------------
-        # NOVO: MOTOR DE DIAGNÓSTICO PREVENTIVO (ALERTAS DE QUEDA)
+        # MOTOR DE DIAGNÓSTICO PREVENTIVO (ALERTAS DE QUEDA)
         # ---------------------------------------------------------
         st.divider()
         st.subheader("Radar de Risco e Diagnóstico Pedagógico")
@@ -218,7 +258,7 @@ if menu == "Analise Preditiva":
         if (ieg - ida) >= 2.5:
             st.warning("⚠️ **Esforço Não Convertido:** O engajamento está alto, mas não se reflete nas notas. É necessário intervir na metodologia de estudo antes que ocorra esgotamento e desmotivação.")
 
-        # 3. Alerta de Limiar Acadêmico Invisível (para alunos que não foram preditos como Quartzo)
+        # 3. Alerta de Limiar Acadêmico Invisível
         if ida < 6.0 and predicao in ["Agata", "Ametista", "Topazio"]:
             st.warning("⚠️ **Base Acadêmica Frágil:** A classificação geral está protegida pelo engajamento, mas a nota acadêmica (IDA) já se encontra em zona de risco crítico para o próximo ciclo.")
             
@@ -226,8 +266,11 @@ if menu == "Analise Preditiva":
         if (iaa - ida) < 2.0 and (ieg - ida) < 2.5 and (ida >= 6.0 or predicao == "Quartzo"):
              st.success("✅ **Nenhum alerta preditivo adicional detectado.** O aluno apresenta indicadores proporcionais e consistentes com a sua base.")
 
-        st.divider()
-        # Alerta Customizado em HTML/CSS
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # ---------------------------------------------------------
+        # AVISO CUSTOMIZADO DE TREINAMENTO (HTML/CSS)
+        # ---------------------------------------------------------
         st.markdown("""
         <div style="background-color: #f0f2f6; 
                     padding: 15px; 
@@ -241,11 +284,11 @@ if menu == "Analise Preditiva":
             visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.
         </div>
         """, unsafe_allow_html=True)
+		
         with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
             st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
             st.dataframe(entrada, use_container_width=True)
             
-
 # ==========================================
 # PÁGINA 2: DASHBOARDS
 # ==========================================
@@ -260,7 +303,6 @@ elif menu == "Dashboards Dados 2022 - 2024":
             "explicacao": "O engajamento (IEG) funciona como o motor de arranque, mas não sustenta a alta performance sozinho. Na fase Quartzo, o IEG (5.61) é mais de 60% superior ao desempenho acadêmico (IDA: 3.46). Conforme o aluno avança, essa lacuna se fecha rapidamente, chegando a uma diferença de apenas 14% no Topázio. O insight é claro: para tirar o aluno do Quartzo, foca-se na base acadêmica; para transformar um Ametista em Topázio, o desafio é nivelar a cognição ao alto engajamento que ele já possui."
         },       
          {
-
             "arquivo": "evolucao_qtd_pedras.png",
             "titulo": "Evolução Quantidade de Alunos por Pedra",
             "explicacao": "Escreva aqui a análise do Gráfico 2. Destaque os principais padrões de engajamento ou notas que você deseja que a equipe pedagógica perceba."
