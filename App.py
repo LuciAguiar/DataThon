@@ -346,7 +346,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
             "explicacao": "Os gráficos evidenciam que a estabilidade emocional e social (IPS) atua como um forte preditor do sucesso acadêmico. Alunos que sofreram quedas significativas tanto em desempenho (IDA) quanto em engajamento (IEG) já apresentavam, no ano anterior, um alicerce psicossocial consideravelmente mais baixo e instável (caixas vermelhas). Em contrapartida, estudantes que mantiveram ou evoluíram em suas métricas sustentavam uma base psicossocial sólida (caixas verdes com medianas altas). O insight gerado é direto: fragilidades psicossociais não tratadas hoje se convertem em defasagem acadêmica no próximo ciclo."
         },
         {
-             "arquivo": "ievolucao_influencia_ipv_labels.png",
+             "arquivo": "evolucao_influencia_ipv_labels.png",
              "titulo": "Influência do IPV Atual nos Indicadores Do Ano Seguinte",
              "explicacao": "O gráfico revela uma mudança estrutural na dinâmica que leva um aluno ao 'Ponto de Virada' (IPV). O destaque absoluto é a disparada da influência do **Indicador Psicopedagógico (IPP)**, cuja correlação saltou drasticamente para 0.75 em 2024, assumindo a liderança como o maior motor de transformação. O Engajamento (IEG) também ganhou tração (0.58), enquanto o peso do Desempenho Acadêmico (IDA) permaneceu estável. O insight para a equipe é claro: o salto definitivo de desenvolvimento do aluno não é mais tracionado isoladamente pelas notas, mas está profundamente dependente do suporte psicopedagógico e de sua dedicação ativa."
         }  
