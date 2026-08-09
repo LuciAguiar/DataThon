@@ -342,7 +342,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
         },
         {
             "arquivo": "ips_preditivo.png",
-            "titulo": "",
+            "titulo": "Influência do IPS de um ano no IDA e IEG do ano seguinte",
             "explicacao": "Os gráficos evidenciam que a estabilidade emocional e social (IPS) atua como um forte preditor do sucesso acadêmico. Alunos que sofreram quedas significativas tanto em desempenho (IDA) quanto em engajamento (IEG) já apresentavam, no ano anterior, um alicerce psicossocial consideravelmente mais baixo e instável (caixas vermelhas). Em contrapartida, estudantes que mantiveram ou evoluíram em suas métricas sustentavam uma base psicossocial sólida (caixas verdes com medianas altas). O insight gerado é direto: fragilidades psicossociais não tratadas hoje se convertem em defasagem acadêmica no próximo ciclo."
         }
     ]
