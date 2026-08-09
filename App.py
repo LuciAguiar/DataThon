@@ -338,7 +338,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
          {
             "arquivo": "ida_por_fase_ano.png",
             "titulo": "Evolução IDA ao Longo dos Anos",
-            st.info("**Análise dos Dados:** O gráfico revela que 2023 funcionou como um ano de forte tração e pico de Desempenho Acadêmico (IDA) para a maioria das turmas. Em 2024, nota-se uma leve retração em fases iniciais e intermediárias (como 2 e 3), refletindo o choque natural com o aumento da complexidade curricular. O grande destaque positivo fica com as **Fases 5 e 6**, que mantiveram crescimento contínuo. A extrema volatilidade da **Fase 7** reforça a necessidade de analisá-la isoladamente para evitar distorções globais.")
+            "explicacao": "**Análise dos Dados:** O gráfico revela que 2023 funcionou como um ano de forte tração e pico de Desempenho Acadêmico (IDA) para a maioria das turmas. Em 2024, nota-se uma leve retração em fases iniciais e intermediárias (como 2 e 3), refletindo o choque natural com o aumento da complexidade curricular. O grande destaque positivo fica com as **Fases 5 e 6**, que mantiveram crescimento contínuo. A extrema volatilidade da **Fase 7** reforça a necessidade de analisá-la isoladamente para evitar distorções globais."
             #"explicacao": "O gráfico mostra que não existe um padrão de crescimento ou queda por indicador."
         },
         {
