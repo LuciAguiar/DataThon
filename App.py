@@ -338,13 +338,12 @@ elif menu == "Dashboards Dados 2022 - 2024":
          {
             "arquivo": "ida_por_fase_ano.png",
             "titulo": "Evolução IDA ao Longo dos Anos",
-            "explicacao": "**Análise dos Dados:** O gráfico revela que 2023 funcionou como um ano de forte tração e pico de Desempenho Acadêmico (IDA) para a maioria das turmas. Em 2024, nota-se uma leve retração em fases iniciais e intermediárias (como 2 e 3), refletindo o choque natural com o aumento da complexidade curricular. O grande destaque positivo fica com as **Fases 5 e 6**, que mantiveram crescimento contínuo. A extrema volatilidade da **Fase 7** reforça a necessidade de analisá-la isoladamente para evitar distorções globais."
-            #"explicacao": "O gráfico mostra que não existe um padrão de crescimento ou queda por indicador."
+            "explicacao": "O gráfico revela que 2023 funcionou como um ano de forte tração e pico de Desempenho Acadêmico (IDA) para a maioria das turmas. Em 2024, nota-se uma leve retração em fases iniciais e intermediárias (como 2 e 3), refletindo o choque natural com o aumento da complexidade curricular. O grande destaque positivo fica com as **Fases 5 e 6**, que mantiveram crescimento contínuo. A extrema volatilidade da **Fase 7** reforça a necessidade de analisá-la isoladamente para evitar distorções globais."
         },
         {
-            "arquivo": "ingressantes_idade.png",
+            "arquivo": "ips_preditivo.png",
             "titulo": "",
-            "explicacao": "Este gráfico demonstra o desempenho atual do algoritmo de Machine Learning. Destaca-se o salto no Recall (Sensibilidade) para a pedra Quartzo, atingindo 40% graças ao balanceamento (SMOTE), permitindo uma identificação precoce e mais apurada de alunos com alto risco de evasão."
+            "explicacao": "Os gráficos evidenciam que a estabilidade emocional e social (IPS) atua como um forte preditor do sucesso acadêmico. Alunos que sofreram quedas significativas tanto em desempenho (IDA) quanto em engajamento (IEG) já apresentavam, no ano anterior, um alicerce psicossocial consideravelmente mais baixo e instável (caixas vermelhas). Em contrapartida, estudantes que mantiveram ou evoluíram em suas métricas sustentavam uma base psicossocial sólida (caixas verdes com medianas altas). O insight gerado é direto: fragilidades psicossociais não tratadas hoje se convertem em defasagem acadêmica no próximo ciclo."
         }
     ]
     
