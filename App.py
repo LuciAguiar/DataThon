@@ -5,7 +5,7 @@ import base64
 import os
     
 # Configuração da página
-st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="half")
+st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
 
 # Carregar o NOVO modelo em cache
 @st.cache_resource
