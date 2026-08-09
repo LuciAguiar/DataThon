@@ -363,16 +363,16 @@ elif menu == "Dashboards Dados 2022 - 2024":
 # ==========================================
 elif menu == "Documentação Executiva":
     st.title("Documentação Oficial 📄")
-    st.write("Acesse abaixo o documento técnico detalhando a modelagem preditiva e as regras de negócio.")
+    st.write("Acesse abaixo o documento com as análises detalhadas dos dados.")
     
-    caminho_pdf = "Documentação.pdf"
+    caminho_pdf = "Projeto Passos Magicos.pdf"
     
     if os.path.exists(caminho_pdf):
         with open(caminho_pdf, "rb") as pdf_file:
             st.download_button(
                 label="⬇️ Baixar Documentação em PDF",
                 data=pdf_file,
-                file_name="Documentação.pdf",
+                file_name="Projeto Passos Magicos.pdf",
                 mime="application/pdf",
                 type="primary"
             )
