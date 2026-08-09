@@ -33,6 +33,11 @@ st.markdown("""
         border: 0;
         border-top: 1px solid #e0e0e0;
     }
+    /* Efeito de hover na imagem de download da documentação */
+    .capa-doc:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.4) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -151,10 +156,7 @@ if menu == "Analise Preditiva":
     col1, col2 = st.columns(2)
 
     with col1:
-        # Título principal da coluna (Tamanho 4)
         st.markdown("#### 📚 Frente Acadêmica")
-        
-        # Subtítulo (Tamanho 5)
         st.markdown("##### 📝 Composição de Notas (IDA)")
         nota_mat = st.slider("Matemática", 0.0, 10.0, 5.0, 0.1)
         nota_por = st.slider("Português", 0.0, 10.0, 5.0, 0.1)
@@ -163,7 +165,6 @@ if menu == "Analise Preditiva":
         ida = (nota_mat + nota_por + nota_ing) / 3
         st.metric(label="📊 IDA Calculado (Média das Notas)", value=f"{ida:.2f}")
         
-        # Subtítulo (Tamanho 5) padronizado
         st.markdown("#### 🎯 Participação e Nivelamento")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
         
@@ -182,10 +183,7 @@ if menu == "Analise Preditiva":
             ian = 2.5
 
     with col2:
-        # Título principal da coluna (Tamanho 4)
         st.markdown("#### 🧠 Frente Psicossocial")
-        
-        # Subtítulo (Tamanho 5) padronizado
         st.markdown("##### 🧭 Indicadores Comportamentais")
         ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
         ipv = st.slider("IPV - Ponto de Virada", 0.0, 10.0, 5.0, 0.1)
@@ -193,6 +191,7 @@ if menu == "Analise Preditiva":
         iaa = st.slider("IAA - Autoavaliação", 0.0, 10.0, 5.0, 0.1)
 
     st.divider()
+    
     # Cálculo automático do INDE Oficial
     pesos = {'IAN': 0.1, 'IDA': 0.2, 'IEG': 0.2, 'IAA': 0.1, 'IPS': 0.1, 'IPV': 0.2, 'IPP': 0.1}
     inde_simulado = (ian*pesos['IAN'] + ida*pesos['IDA'] + ieg*pesos['IEG'] + 
@@ -213,7 +212,7 @@ if menu == "Analise Preditiva":
         st.subheader("Resultado da Predição:")
 
         # ---------------------------------------------------------
-        # PREDIÇÃO E LEITURA DO ALGORITMO (ATUALIZADA)
+        # PREDIÇÃO E LEITURA DO ALGORITMO
         # ---------------------------------------------------------
         predicao = modelo.predict(entrada)[0]
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
@@ -222,19 +221,16 @@ if menu == "Analise Preditiva":
             st.error(f"🚨 Alerta Crítico: O aluno tem alto risco de rebaixamento para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
             
-            # Cenário 1: Voo de Galinha (Muito esforço, sem resultado)
             if ieg >= 7.0 and ida < 6.0:
                 st.write("""
                 **Esforço Não Convertido:** O modelo detectou um alerta grave. O aluno apresenta um alto engajamento (IEG), mas uma severa deficiência acadêmica (IDA). A inércia atual aponta para frustração iminente: ele se esforça, mas não vê os resultados nas notas.
                 **Ação recomendada: Intervenção urgente na metodologia de estudo, técnicas de retenção e aulas de nivelamento.**
                 """)
-            # Cenário 2: Inteligente, mas desconectado
             elif ida >= 7.0 and media_engajamento_psico < 6.0:
                 st.write("""
                 **Sinal de Evasão/Desmotivação:** O aluno tem capacidade cognitiva (notas boas), mas o seu engajamento e indicadores psicossociais estão desproporcionalmente baixos. Alunos com este perfil apresentam risco de abandono por falta de conexão com o propósito. 
                 **Ação recomendada: Foco no acolhimento emocional e escuta ativa.**
                 """)
-            # Cenário 3: Defasagem real (Tudo baixo)
             else:
                 st.write("""
                 **Defasagem Generalizada:** O aluno apresenta indicadores críticos tanto na frente acadêmica quanto no engajamento. A inércia atual aponta para uma estagnação severa na base.
@@ -245,7 +241,6 @@ if menu == "Analise Preditiva":
             st.warning(f"⚠️ Atenção: O aluno está projetado para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
             
-            # Cenário de Risco Oculto (Engajamento mascarando nota ruim)
             if ieg >= 8.0 and ida < 6.0:
                  st.write("""
                  **Alerta de Mascaramento (Risco Oculto):** A classificação 'Ágata' está sendo sustentada quase que exclusivamente pelo alto engajamento (IEG), mascarando uma base acadêmica frágil. Sem notas que sustentem a evolução, a queda no próximo ciclo é quase certa.
@@ -278,32 +273,25 @@ if menu == "Analise Preditiva":
             """)
         
         # ---------------------------------------------------------
-        # MOTOR DE DIAGNÓSTICO PREVENTIVO (ALERTAS DE QUEDA)
+        # MOTOR DE DIAGNÓSTICO PREVENTIVO
         # ---------------------------------------------------------
         st.divider()
         st.subheader("Radar de Risco e Diagnóstico Pedagógico")
 
-        # 1. Alerta de Ilusão de Desempenho (Descolamento IAA vs IDA)
         if (iaa - ida) >= 2.0:
             st.warning("⚠️ **Ilusão de Desempenho:** O aluno avalia o próprio desempenho muito acima da realidade acadêmica. Este é um forte preditor de frustração e rebaixamento de nível no próximo ano.")
 
-        # 2. Alerta de Esforço Não Convertido (Descolamento IEG vs IDA)
         if (ieg - ida) >= 2.5:
             st.warning("⚠️ **Esforço Não Convertido:** O engajamento está alto, mas não se reflete nas notas. É necessário intervir na metodologia de estudo antes que ocorra esgotamento e desmotivação.")
 
-        # 3. Alerta de Limiar Acadêmico Invisível
         if ida < 6.0 and predicao in ["Agata", "Ametista", "Topazio"]:
             st.warning("⚠️ **Base Acadêmica Frágil:** A classificação geral está protegida pelo engajamento, mas a nota acadêmica (IDA) já se encontra em zona de risco crítico para o próximo ciclo.")
             
-        # Caso nenhum alerta seja disparado
         if (iaa - ida) < 2.0 and (ieg - ida) < 2.5 and (ida >= 6.0 or predicao == "Quartzo"):
              st.success("✅ **Nenhum alerta preditivo adicional detectado.** O aluno apresenta indicadores proporcionais e consistentes com a sua base.")
 
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # ---------------------------------------------------------
-        # AVISO CUSTOMIZADO DE TREINAMENTO (HTML/CSS)
-        # ---------------------------------------------------------
         st.markdown("""
         <div style="background-color: #f0f2f6; 
                     padding: 15px; 
@@ -350,12 +338,11 @@ elif menu == "Dashboards Dados 2022 - 2024":
              "titulo": "Correlação Entre o IPV e os Demais Indicadores",
              "explicacao": "O gráfico revela uma mudança estrutural na dinâmica que leva um aluno ao 'Ponto de Virada' (IPV). O destaque absoluto é a disparada da influência do **Indicador Psicopedagógico (IPP)**, cuja correlação saltou drasticamente para 0.75 em 2024, assumindo a liderança como o maior motor de transformação. O Engajamento (IEG) também ganhou tração (0.58), enquanto o peso do Desempenho Acadêmico (IDA) permaneceu estável. O insight para a equipe é claro: o salto definitivo de desenvolvimento do aluno não é mais tracionado isoladamente pelas notas, mas está profundamente dependente do suporte psicopedagógico e de sua dedicação ativa."
         },
-  {
+        {
              "arquivo": "preditores_risco.png",
              "titulo": "Fatores que Influenciam na Queda da Classificação Ano Seguinte",
-             "explicacao": "Os gráficos revelam padrões preditivos contra-intuitivos e fundamentais para a intervenção precoce. No Engajamento (IEG), alunos com dedicação Média ou Alta apresentam o maior risco de queda no ciclo seguinte (atingindo 45.8%). No Indicador Psicossocial (IPS), o padrão forma uma curva em "U": a zona de maior segurança é a intermediária (39.8%), enquanto o extremo de alta sociabilidade concentra o maior risco de todos (51.8%). Isso demonstra que uma integração social e familiar percebida como perfeita pode gerar uma falsa sensação de conforto, mascarando defasagens de aprendizado que se agravarão no ano seguinte."
+             "explicacao": "Os gráficos revelam padrões preditivos contra-intuitivos e fundamentais para a intervenção precoce. No Engajamento (IEG), alunos com dedicação Média ou Alta apresentam o maior risco de queda no ciclo seguinte (atingindo 45.8%). No Indicador Psicossocial (IPS), o padrão forma uma curva em 'U': a zona de maior segurança é a intermediária (39.8%), enquanto o extremo de alta sociabilidade concentra o maior risco de todos (51.8%). Isso demonstra que uma integração social e familiar percebida como perfeita pode gerar uma falsa sensação de conforto, mascarando defasagens de aprendizado que se agravarão no ano seguinte."
         }
-
     ]
     
     for dash in dashboards:
@@ -374,27 +361,42 @@ elif menu == "Dashboards Dados 2022 - 2024":
 # ==========================================
 elif menu == "Documentação Executiva":
     st.title("Documentação Oficial 📄")
-    st.write("Acesse abaixo o documento com as análises detalhadas dos dados.")
+    st.write("Clique na imagem da capa abaixo para iniciar o download do documento completo com as análises detalhadas.")
     
     caminho_pdf = "Projeto Passos Magicos.pdf"
+    caminho_capa = "Capa-Documento.png"  # Certifique-se de que a imagem da capa possui este nome na sua pasta
     
     if os.path.exists(caminho_pdf):
-        with open(caminho_pdf, "rb") as pdf_file:
-            st.download_button(
-                label="⬇️ Baixar Documentação em PDF",
-                data=pdf_file,
-                file_name="Projeto Passos Magicos.pdf",
-                mime="application/pdf",
-                type="primary"
-            )
-        
-        st.divider()
-        st.markdown("### Visualização do Documento")
-        
-        with open(caminho_pdf, "rb") as f:
-            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-        
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
+        if os.path.exists(caminho_capa):
+            # Lê o PDF e a Imagem e converte ambos para Base64
+            with open(caminho_pdf, "rb") as f_pdf:
+                b64_pdf = base64.b64encode(f_pdf.read()).decode('utf-8')
+            with open(caminho_capa, "rb") as f_img:
+                b64_img = base64.b64encode(f_img.read()).decode('utf-8')
+                
+            # Cria a estrutura HTML com a tag <a> (Link de Download) envolvendo a tag <img>
+            html_img_link = f'''
+            <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+                <a href="data:application/pdf;base64,{b64_pdf}" download="Projeto Passos Magicos.pdf" title="Clique para baixar o PDF">
+                    <img class="capa-doc" src="data:image/png;base64,{b64_img}" alt="Capa do Documento" style="width: 100%; max-width: 450px; border-radius: 12px; box-shadow: 0px 8px 20px rgba(0,0,0,0.25); transition: transform 0.3s ease;">
+                </a>
+                <p style="color: #666; margin-top: 15px; font-size: 0.95em; font-weight: 500;">
+                    👆 Clique na imagem para fazer o download automático do arquivo PDF.
+                </p>
+            </div>
+            '''
+            st.markdown(html_img_link, unsafe_allow_html=True)
+            
+        else:
+            # Fallback seguro caso você esqueça de colocar a imagem da capa na pasta
+            st.warning("⚠️ Imagem de capa não encontrada. Faça o upload do arquivo 'Capa-Documento.png' no GitHub para habilitar a visualização clicável.")
+            with open(caminho_pdf, "rb") as pdf_file:
+                st.download_button(
+                    label="⬇️ Baixar Documentação em PDF",
+                    data=pdf_file,
+                    file_name="Projeto Passos Magicos.pdf",
+                    mime="application/pdf",
+                    type="primary"
+                )
     else:
-        st.error("O arquivo 'Documentação.pdf' não foi encontrado no repositório. Por favor, verifique o nome exato e faça o upload no GitHub.")
+        st.error("O arquivo 'Projeto Passos Magicos.pdf' não foi encontrado no repositório. Por favor, verifique o nome exato e faça o upload no GitHub.")
