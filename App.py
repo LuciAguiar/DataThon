@@ -151,9 +151,9 @@ if menu == "Analise Preditiva":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Indicadores Acadêmicos e Engajamento")
+        st.subheader("📚 Avaliação Cognitiva e Acadêmica")
         
-        st.markdown("**Notas das Disciplinas Base (Cálculo do IDA)**")
+        st.markdown("##### 📝 Avaliação Quantitativa (Composição do IDA)")
         nota_mat = st.slider("Matemática", 0.0, 10.0, 5.0, 0.1)
         nota_por = st.slider("Português", 0.0, 10.0, 5.0, 0.1)
         nota_ing = st.slider("Inglês", 0.0, 10.0, 5.0, 0.1)
@@ -161,7 +161,7 @@ if menu == "Analise Preditiva":
         ida = (nota_mat + nota_por + nota_ing) / 3
         st.metric(label="📊 IDA Calculado (Média das Notas)", value=f"{ida:.2f}")
         
-        st.markdown("**Outros Indicadores Acadêmicos**")
+        st.markdown("##### 🎯 Métricas de Participação e Nivelamento")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
         
         ian_opcao = st.radio(
@@ -179,7 +179,9 @@ if menu == "Analise Preditiva":
             ian = 2.5
 
     with col2:
-        st.subheader("Indicadores Psicossociais e de Base")
+        st.subheader("🧠 Perfil Psicossocial e Comportamental")
+        
+        st.markdown("##### 🧭 Indicadores de Base e Autopercepção")
         ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
         ipv = st.slider("IPV - Ponto de Virada", 0.0, 10.0, 5.0, 0.1)
         ips = st.slider("IPS - Indicador Psicossocial", 0.0, 10.0, 5.0, 0.1)
