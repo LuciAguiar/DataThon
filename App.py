@@ -164,7 +164,7 @@ if menu == "Analise Preditiva":
         st.metric(label="📊 IDA Calculado (Média das Notas)", value=f"{ida:.2f}")
         
         # Subtítulo (Tamanho 5) padronizado
-        st.markdown("##### 🎯 Participação e Nivelamento")
+        st.markdown("#### 🎯 Participação e Nivelamento")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
         
         ian_opcao = st.radio(
