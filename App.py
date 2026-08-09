@@ -103,7 +103,7 @@ if menu == "Analise Preditiva":
     
     st.markdown("""
     Esta ferramenta permite simular o impacto dos indicadores acadêmicos e psicossociais 
-    na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise What-If**.
+    na classificação final do aluno, determinada pela Pedra. Ajuste os valores abaixo para realizar uma **Análise Preditiva**.
     """)
     
     # Tabela de Referência Visual (Com Imagens JPG)
