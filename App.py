@@ -327,7 +327,7 @@ if menu == "Analise Preditiva":
 # ==========================================
 elif menu == "Dashboards Dados 2022 - 2024":
     st.title("Histórico de Análises 📈")
-    st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
+    st.write("Abaixo estão algumas visualizações gráficas das análises e métricas do modelo treinado. A análise completa consta no documento PDF que pode ser acessado através do menu 'Documentação Executiva'")
     
     dashboards = [
        {
