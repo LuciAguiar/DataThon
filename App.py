@@ -227,9 +227,20 @@ if menu == "Analise Preditiva":
              st.success("✅ **Nenhum alerta preditivo adicional detectado.** O aluno apresenta indicadores proporcionais e consistentes com a sua base.")
 
         st.divider()
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
-		
+        # Alerta Customizado em HTML/CSS
+        st.markdown("""
+        <div style="background-color: #f0f2f6; 
+                    padding: 15px; 
+                    border-radius: 8px; 
+                    border-left: 6px solid #4f8bf9; 
+                    color: #31333F;
+                    margin-bottom: 20px;">
+            <span style="font-size: 1.1em;">⚠️</span> 
+            <strong>AVISO IMPORTANTE:</strong> O modelo de dados foi treinado através de uma base 
+            histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, 
+            visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.
+        </div>
+        """, unsafe_allow_html=True)
         with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
             st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
             st.dataframe(entrada, use_container_width=True)
