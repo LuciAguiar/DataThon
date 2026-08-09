@@ -3,7 +3,6 @@ import pandas as pd
 import joblib
 import base64
 import os
-
     
 # Configuração da página
 st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
@@ -14,7 +13,6 @@ def load_model():
     return joblib.load('modelo_passos_magicos_2023.pkl')
 
 modelo = load_model()
-
 
 # ==========================================
 # MENU LATERAL (SIDEBAR)
@@ -48,9 +46,6 @@ if menu == "Analise Preditiva":
     # Tabela de Referência Visual (Com Imagens JPG)
     st.markdown("### 📊 Tabela de Referência (INDE)")
     
-    # TRUQUE DE LAYOUT: [1, 1, 1, 1, 4] 
-    # As 4 primeiras colunas têm peso "1" (ficam estreitas e juntas).
-    # A última coluna tem peso "4" (serve como um espaçador vazio enorme à direita).
     col_q, col_ag, col_am, col_t, espacador = st.columns([1, 1, 1, 1, 3])
     
     with col_q:
@@ -100,28 +95,26 @@ if menu == "Analise Preditiva":
         nota_por = st.slider("Português", 0.0, 10.0, 5.0, 0.1)
         nota_ing = st.slider("Inglês", 0.0, 10.0, 5.0, 0.1)
         
-        # Cálculo dinâmico do IDA
         ida = (nota_mat + nota_por + nota_ing) / 3
         st.info(f"**IDA Calculado (Média):** {ida:.2f}")
         
         st.markdown("**Outros Indicadores Acadêmicos**")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
         
-        # Novo IAN com Radio Button (horizontal para ficar mais elegante)
         ian_opcao = st.radio(
             "IAN - Adequação de Nível",
             options=["Em Fase", "Moderada", "Severa"],
-            index=1,  # Inicia marcado no "Moderada" (equivalente ao 5.0 antigo)
+            index=1,
             horizontal=True
         )
         
-        # Lógica de tradução: converte o texto do botão no número exato para o modelo
         if ian_opcao == "Em Fase":
             ian = 10.0
         elif ian_opcao == "Moderada":
             ian = 5.0
         elif ian_opcao == "Severa":
             ian = 2.5
+
     with col2:
         st.subheader("Indicadores Psicossociais e de Base")
         ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
@@ -131,16 +124,14 @@ if menu == "Analise Preditiva":
 
     st.divider()
 
-    # Cálculo automático do INDE Oficial (com IPP)
+    # Cálculo automático do INDE Oficial
     pesos = {'IAN': 0.1, 'IDA': 0.2, 'IEG': 0.2, 'IAA': 0.1, 'IPS': 0.1, 'IPV': 0.2, 'IPP': 0.1}
     inde_simulado = (ian*pesos['IAN'] + ida*pesos['IDA'] + ieg*pesos['IEG'] + 
                      iaa*pesos['IAA'] + ips*pesos['IPS'] + ipv*pesos['IPV'] + ipp*pesos['IPP'])
 
     st.write(f"**INDE Atual Simulado:** {inde_simulado:.2f}")
 
-    # Botão de Predição
     if st.button("Simular Classificação (Pedra) no Próximo Ano", type="primary"):
-        # A ordem deve ser estritamente igual a do treinamento:
         features = ['IAN', 'IDA', 'IEG', 'IAA', 'IPS', 'IPV', 'IPP', 'INDE_ATUAL']
         entrada = pd.DataFrame([[ian, ida, ieg, iaa, ips, ipv, ipp, inde_simulado]], columns=features)
         
@@ -148,14 +139,13 @@ if menu == "Analise Preditiva":
         st.subheader("Resultado da Predição:")
 
         # ---------------------------------------------------------
-        # MOTOR DE DIAGNÓSTICO PEDAGÓGICO
+        # PREDIÇÃO E LEITURA DO ALGORITMO
         # ---------------------------------------------------------
         predicao = modelo.predict(entrada)[0]
 
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
         descolamento_cognitivo = ida - media_engajamento_psico
        
-
         if predicao == 'Quartzo':
             st.error(f"🚨 Alerta Crítico: O aluno tem alto risco de rebaixamento para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
@@ -205,26 +195,43 @@ if menu == "Analise Preditiva":
             **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
             """)
         
+        # ---------------------------------------------------------
+        # NOVO: MOTOR DE DIAGNÓSTICO PREVENTIVO (ALERTAS DE QUEDA)
+        # ---------------------------------------------------------
+        st.divider()
+        st.subheader("Radar de Risco e Diagnóstico Pedagógico")
+
+        # 1. Alerta de Ilusão de Desempenho (Descolamento IAA vs IDA)
+        if (iaa - ida) >= 2.0:
+            st.warning("⚠️ **Ilusão de Desempenho:** O aluno avalia o próprio desempenho muito acima da realidade acadêmica. Este é um forte preditor de frustração e rebaixamento de nível no próximo ano.")
+
+        # 2. Alerta de Esforço Não Convertido (Descolamento IEG vs IDA)
+        if (ieg - ida) >= 2.5:
+            st.warning("⚠️ **Esforço Não Convertido:** O engajamento está alto, mas não se reflete nas notas. É necessário intervir na metodologia de estudo antes que ocorra esgotamento e desmotivação.")
+
+        # 3. Alerta de Limiar Acadêmico Invisível (para alunos que não foram preditos como Quartzo)
+        if ida < 6.0 and predicao in ["Agata", "Ametista", "Topazio"]:
+            st.warning("⚠️ **Base Acadêmica Frágil:** A classificação geral está protegida pelo engajamento, mas a nota acadêmica (IDA) já se encontra em zona de risco crítico para o próximo ciclo.")
+            
+        # Caso nenhum alerta seja disparado
+        if (iaa - ida) < 2.0 and (ieg - ida) < 2.5 and (ida >= 6.0 or predicao == "Quartzo"):
+             st.success("✅ **Nenhum alerta preditivo adicional detectado.** O aluno apresenta indicadores proporcionais e consistentes com a sua base.")
+
         st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
 		
-		# ---------------------------------------------------------
-        # NOVA LÓGICA: EXIBIR OS DADOS ENVIADOS AO MODELO
-        # ---------------------------------------------------------
         with st.expander("🔍 Visualizar dados enviados ao modelo (Payload)"):
             st.write("Estes são os valores exatos que o algoritmo está usando para calcular a previsão:")
-            # Exibe o DataFrame formatado na tela
             st.dataframe(entrada, use_container_width=True)
             
 
- # ==========================================
+# ==========================================
 # PÁGINA 2: DASHBOARDS
 # ==========================================
 elif menu == "Dashboards Dados 2022 - 2024":
     st.title("Histórico de Análises 📈")
     st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
     
-    # Criamos uma lista de dicionários vinculando a imagem ao seu texto explicativo
     dashboards = [
        {
             "arquivo": "analise_por_pedra.png",
@@ -244,34 +251,16 @@ elif menu == "Dashboards Dados 2022 - 2024":
         }
     ]
     
-    # Laço de repetição atualizado para renderizar o título, a imagem e a caixa de texto
     for dash in dashboards:
         st.subheader(dash["titulo"])
         
         if os.path.exists(dash["arquivo"]):
             st.image(dash["arquivo"], use_container_width=True)
-            # A caixa explicativa logo abaixo da imagem
             st.info(f"**Análise dos Dados:** {dash['explicacao']}")
         else:
             st.warning(f"A imagem '{dash['arquivo']}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
             
-        st.divider() # Cria a linha separadora entre os gráficos
-               
-# ==========================================
-# PÁGINA 2: DASHBOARDS
-# ==========================================
-elif menu == "Dashboards Dados 2022 - 2024":
-    st.title("Histórico de Análises 📈")
-    st.write("Abaixo estão as visualizações gráficas das análises e métricas do modelo treinado.")
-    
-    imagens = ["analise_por_pedra.png", "evolucao_qtd_pedras.png", "ingressantes_idade.png"]
-    
-    for img in imagens:
-        if os.path.exists(img):
-            st.image(img, use_container_width=True)
-            st.divider()
-        else:
-            st.warning(f"A imagem '{img}' não foi encontrada no diretório. Por favor, faça o upload no GitHub.")
+        st.divider()
 
 # ==========================================
 # PÁGINA 3: DOCUMENTAÇÃO EXECUTIVA
@@ -283,7 +272,6 @@ elif menu == "Documentação Executiva":
     caminho_pdf = "Documentação.pdf"
     
     if os.path.exists(caminho_pdf):
-        # Botão para quem preferir baixar o arquivo
         with open(caminho_pdf, "rb") as pdf_file:
             st.download_button(
                 label="⬇️ Baixar Documentação em PDF",
@@ -296,7 +284,6 @@ elif menu == "Documentação Executiva":
         st.divider()
         st.markdown("### Visualização do Documento")
         
-        # Renderiza o PDF para leitura na própria tela do aplicativo
         with open(caminho_pdf, "rb") as f:
             base64_pdf = base64.b64encode(f.read()).decode('utf-8')
         
