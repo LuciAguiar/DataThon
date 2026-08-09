@@ -5,7 +5,7 @@ import base64
 import os
     
 # Configuração da página
-st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="wide")
+st.set_page_config(page_title="Passos Mágicos - Radar Pedagógico", page_icon="🔮", layout="Medium")
 
 # Carregar o NOVO modelo em cache
 @st.cache_resource
@@ -40,7 +40,7 @@ if menu == "Analise Preditiva":
     
     st.markdown("""
     Esta ferramenta permite simular o impacto dos indicadores acadêmicos e psicossociais 
-    na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise What-If**.
+    na classificação final do aluno (Pedra). Ajuste os valores abaixo para realizar uma **Análise Preditiva**.
     """)
     
     # Tabela de Referência Visual (Com Imagens JPG)
