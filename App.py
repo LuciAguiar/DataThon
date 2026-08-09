@@ -349,7 +349,13 @@ elif menu == "Dashboards Dados 2022 - 2024":
              "arquivo": "evolucao_influencia_ipv_labels.png",
              "titulo": "Correlação Entre o IPV e os Demais Indicadores",
              "explicacao": "O gráfico revela uma mudança estrutural na dinâmica que leva um aluno ao 'Ponto de Virada' (IPV). O destaque absoluto é a disparada da influência do **Indicador Psicopedagógico (IPP)**, cuja correlação saltou drasticamente para 0.75 em 2024, assumindo a liderança como o maior motor de transformação. O Engajamento (IEG) também ganhou tração (0.58), enquanto o peso do Desempenho Acadêmico (IDA) permaneceu estável. O insight para a equipe é claro: o salto definitivo de desenvolvimento do aluno não é mais tracionado isoladamente pelas notas, mas está profundamente dependente do suporte psicopedagógico e de sua dedicação ativa."
-        }  
+        },
+  {
+             "arquivo": "preditores_risco.png",
+             "titulo": "Fatores que Influenciam na Queda da Classificação Ano Seguinte",
+             "explicacao": "s gráficos revelam padrões preditivos contra-intuitivos e fundamentais para a intervenção precoce. No Engajamento (IEG), alunos com dedicação Média ou Alta apresentam o maior risco de queda no ciclo seguinte (atingindo 45.8%). No Indicador Psicossocial (IPS), o padrão forma uma curva em "U": a zona de maior segurança é a intermediária (39.8%), enquanto o extremo de alta sociabilidade concentra o maior risco de todos (51.8%). Isso demonstra que uma integração social e familiar percebida como perfeita pode gerar uma falsa sensação de conforto, mascarando defasagens de aprendizado que se agravarão no ano seguinte."
+        }
+
     ]
     
     for dash in dashboards:
