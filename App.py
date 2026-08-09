@@ -151,9 +151,11 @@ if menu == "Analise Preditiva":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("📚 Avaliação Cognitiva e Acadêmica")
+        # Título principal da coluna (Tamanho 4)
+        st.markdown("#### 📚 Frente Acadêmica")
         
-        st.markdown("##### 📝 Avaliação Quantitativa (Composição do IDA)")
+        # Subtítulo (Tamanho 5)
+        st.markdown("##### 📝 Composição de Notas (IDA)")
         nota_mat = st.slider("Matemática", 0.0, 10.0, 5.0, 0.1)
         nota_por = st.slider("Português", 0.0, 10.0, 5.0, 0.1)
         nota_ing = st.slider("Inglês", 0.0, 10.0, 5.0, 0.1)
@@ -161,7 +163,8 @@ if menu == "Analise Preditiva":
         ida = (nota_mat + nota_por + nota_ing) / 3
         st.metric(label="📊 IDA Calculado (Média das Notas)", value=f"{ida:.2f}")
         
-        st.markdown("##### 🎯 Métricas de Participação e Nivelamento")
+        # Subtítulo (Tamanho 5) padronizado
+        st.markdown("##### 🎯 Participação e Nivelamento")
         ieg = st.slider("IEG - Indicador de Engajamento", 0.0, 10.0, 5.0, 0.1)
         
         ian_opcao = st.radio(
@@ -179,16 +182,17 @@ if menu == "Analise Preditiva":
             ian = 2.5
 
     with col2:
-        st.subheader("🧠 Perfil Psicossocial e Comportamental")
+        # Título principal da coluna (Tamanho 4)
+        st.markdown("#### 🧠 Frente Psicossocial")
         
-        st.markdown("##### 🧭 Indicadores de Base e Autopercepção")
+        # Subtítulo (Tamanho 5) padronizado
+        st.markdown("##### 🧭 Indicadores Comportamentais")
         ipp = st.slider("IPP - Indicador Psicopedagógico", 0.0, 10.0, 5.0, 0.1)
         ipv = st.slider("IPV - Ponto de Virada", 0.0, 10.0, 5.0, 0.1)
         ips = st.slider("IPS - Indicador Psicossocial", 0.0, 10.0, 5.0, 0.1)
         iaa = st.slider("IAA - Autoavaliação", 0.0, 10.0, 5.0, 0.1)
 
     st.divider()
-
     # Cálculo automático do INDE Oficial
     pesos = {'IAN': 0.1, 'IDA': 0.2, 'IEG': 0.2, 'IAA': 0.1, 'IPS': 0.1, 'IPV': 0.2, 'IPP': 0.1}
     inde_simulado = (ian*pesos['IAN'] + ida*pesos['IDA'] + ieg*pesos['IEG'] + 
