@@ -144,36 +144,45 @@ if menu == "Analise Preditiva":
         predicao = modelo.predict(entrada)[0]
 
         media_engajamento_psico = (ieg + ipv + ips + iaa) / 4
-        descolamento_cognitivo = ida - media_engajamento_psico
        
         if predicao == 'Quartzo':
             st.error(f"🚨 Alerta Crítico: O aluno tem alto risco de rebaixamento para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
             
-            if descolamento_cognitivo >= 2.0:
+            # Cenário 1: Voo de Galinha (Muito esforço, sem resultado)
+            if ieg >= 7.0 and ida < 6.0:
                 st.write("""
-                **Sinal de Evasão/Desmotivação:** O modelo detectou um alerta grave. Embora este aluno 
-                tenha capacidade cognitiva (notas razoáveis/altas), o seu engajamento e indicadores 
-                psicossociais estão desproporcionalmente baixos. Historicamente, alunos com este perfil 
-                apresentam alto risco de abandono (evasão) ou regressão severa por falta de suporte emocional 
-                ou falta de conexão com o propósito do projeto. **Ação recomendada: Foco no acolhimento e escuta ativa.**
+                **Esforço Não Convertido:** O modelo detectou um alerta grave. O aluno apresenta um alto engajamento (IEG), mas uma severa deficiência acadêmica (IDA). A inércia atual aponta para frustração iminente: ele se esforça, mas não vê os resultados nas notas.
+                **Ação recomendada: Intervenção urgente na metodologia de estudo, técnicas de retenção e aulas de nivelamento.**
                 """)
+            # Cenário 2: Inteligente, mas desconectado
+            elif ida >= 7.0 and media_engajamento_psico < 6.0:
+                st.write("""
+                **Sinal de Evasão/Desmotivação:** O aluno tem capacidade cognitiva (notas boas), mas o seu engajamento e indicadores psicossociais estão desproporcionalmente baixos. Alunos com este perfil apresentam risco de abandono por falta de conexão com o propósito. 
+                **Ação recomendada: Foco no acolhimento emocional e escuta ativa.**
+                """)
+            # Cenário 3: Defasagem real (Tudo baixo)
             else:
                 st.write("""
-                **Defasagem Generalizada:** O aluno apresenta indicadores baixos tanto na frente acadêmica 
-                quanto no engajamento. A inércia atual aponta para uma estagnação crítica. 
-                **Ação recomendada: Necessidade de intervenção pedagógica de base e resgate de motivação.**
+                **Defasagem Generalizada:** O aluno apresenta indicadores críticos tanto na frente acadêmica quanto no engajamento. A inércia atual aponta para uma estagnação severa na base.
+                **Ação recomendada: Necessidade de intervenção pedagógica de base e resgate total de motivação.**
                 """)
                 
         elif predicao == 'Agata':
             st.warning(f"⚠️ Atenção: O aluno está projetado para a pedra **{predicao}**.")
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
-            st.write("""
-            **Perfil Mediano/Estagnado:** O modelo projeta este aluno na faixa de estabilidade inferior. 
-            Isso geralmente ocorre quando os indicadores se mantêm em uma média morna (em torno de 5 ou 6), 
-            sem picos de engajamento (IEG) ou de virada (IPV). O aluno está acompanhando, mas não está acelerando.
-            **Ação recomendada: Criar pequenos desafios extracurriculares para tentar engatilhar um 'Ponto de Virada'.**
-            """)
+            
+            # Cenário de Risco Oculto (Engajamento mascarando nota ruim)
+            if ieg >= 8.0 and ida < 6.0:
+                 st.write("""
+                 **Alerta de Mascaramento (Risco Oculto):** A classificação 'Ágata' está sendo sustentada quase que exclusivamente pelo alto engajamento (IEG), mascarando uma base acadêmica frágil. Sem notas que sustentem a evolução, a queda no próximo ciclo é quase certa.
+                 **Ação recomendada: Focar imediatamente no reforço das disciplinas base, aproveitando a boa vontade atual do aluno.**
+                 """)
+            else:
+                 st.write("""
+                 **Perfil Estável:** O modelo projeta este aluno na faixa de estabilidade inferior. Os indicadores acompanham a média, mas sem picos de aceleração expressivos.
+                 **Ação recomendada: Criar pequenos desafios extracurriculares para tentar engatilhar um 'Ponto de Virada'.**
+                 """)
             
         elif predicao == 'Ametista':
             st.info(f"✅ Bom desempenho: O aluno está projetado para a pedra **{predicao}**.")
@@ -190,8 +199,8 @@ if menu == "Analise Preditiva":
             st.markdown("### 🧠 Leitura do Algoritmo (Para o Educador):")
             st.write("""
             **Perfil de Alta Performance:** O modelo identificou os traços clássicos de excelência. 
-            O alto nível de engajamento aliado ao desempenho acadêmico cria uma projeção de topo. 
-            Este aluno já compreendeu o propósito da Associação e está voando.
+            O alto nível de engajamento aliado ao excelente desempenho acadêmico cria uma projeção de topo. 
+            Este aluno compreendeu perfeitamente o propósito e está acelerando.
             **Ação recomendada: Inserir o estudante em programas de mentoria, liderança ou desafios avançados para evitar o tédio acadêmico.**
             """)
         
