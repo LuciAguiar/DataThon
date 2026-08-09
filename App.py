@@ -353,7 +353,7 @@ elif menu == "Dashboards Dados 2022 - 2024":
   {
              "arquivo": "preditores_risco.png",
              "titulo": "Fatores que Influenciam na Queda da Classificação Ano Seguinte",
-             "explicacao": "s gráficos revelam padrões preditivos contra-intuitivos e fundamentais para a intervenção precoce. No Engajamento (IEG), alunos com dedicação Média ou Alta apresentam o maior risco de queda no ciclo seguinte (atingindo 45.8%). No Indicador Psicossocial (IPS), o padrão forma uma curva em "U": a zona de maior segurança é a intermediária (39.8%), enquanto o extremo de alta sociabilidade concentra o maior risco de todos (51.8%). Isso demonstra que uma integração social e familiar percebida como perfeita pode gerar uma falsa sensação de conforto, mascarando defasagens de aprendizado que se agravarão no ano seguinte."
+             "explicacao": "Os gráficos revelam padrões preditivos contra-intuitivos e fundamentais para a intervenção precoce. No Engajamento (IEG), alunos com dedicação Média ou Alta apresentam o maior risco de queda no ciclo seguinte (atingindo 45.8%). No Indicador Psicossocial (IPS), o padrão forma uma curva em "U": a zona de maior segurança é a intermediária (39.8%), enquanto o extremo de alta sociabilidade concentra o maior risco de todos (51.8%). Isso demonstra que uma integração social e familiar percebida como perfeita pode gerar uma falsa sensação de conforto, mascarando defasagens de aprendizado que se agravarão no ano seguinte."
         }
 
     ]
