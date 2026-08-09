@@ -226,6 +226,7 @@ if menu == "Analise Preditiva":
         if (iaa - ida) < 2.0 and (ieg - ida) < 2.5 and (ida >= 6.0 or predicao == "Quartzo"):
              st.success("✅ **Nenhum alerta preditivo adicional detectado.** O aluno apresenta indicadores proporcionais e consistentes com a sua base.")
 
+        st.divider()
         st.markdown("<br>", unsafe_allow_html=True)
         st.warning("**WARNING:** O modelo de dados foi treinado através de uma base histórica e os resultados apresentados precisam ser analisados com cautela pelo educador, visto que o modelo não tem acesso a todos os questionários de avaliação qualitativa dos alunos.", icon="⚠️")
 		
