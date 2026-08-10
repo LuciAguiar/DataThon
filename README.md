@@ -14,8 +14,8 @@ Este repositório contém o projeto final de Data Science e o aplicativo prediti
 
 ## 📁 Estrutura do Repositório
 * `app.py`: Arquivo principal contendo o código da interface Streamlit.
-* `PassosMagicos_Clean.ipynb`: Notebook Jupyter com o trabalho de limpeza e preparação dos dados para a análise exploratória* 
-* `PassosMagicos_Explore.ipynb`: Notebook Jupyter com a análise exploratória de dados (EDA) e geração do motor do modelo de machine learning.
+* `1_PassosMagicos_Clean.ipynb`: Notebook Jupyter com o trabalho de limpeza e preparação dos dados para a análise exploratória* 
+* `2_PassosMagicos_Explore.ipynb`: Notebook Jupyter com a análise exploratória de dados (EDA) e geração do motor do modelo de machine learning.
 * `modelo_passos_magicos_2023.pkl`: Modelo de Machine Learning treinado e exportado.
 * `BASE_CONSOLIDADA.xlsx`: Base de dados tratada utilizada pelo algoritmo.
 * `requirements.txt`: Arquivo com as dependências do projeto.
